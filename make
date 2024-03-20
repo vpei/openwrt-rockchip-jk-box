@@ -86,15 +86,18 @@ kernel_repo="https://github.com/ophub/kernel"
 default_tags="stable"
 # Set the tags(kernel_xxx) of the specific kernel, such as 5.15.y, 6.1.y, etc.
 specific_tags="${default_tags}"
-# Set the list of kernels used by default
-rk3588_kernel=("5.10.1")
-rk35xx_kernel=("5.10.1")
-h6_kernel=("6.6.1")
-stable_kernel=("6.1.1" "5.15.1")
+# Set the list of kernels used by default(Fixed version)
+rk3588_kernel=("5.10.y")
+rk35xx_kernel=("5.10.y")
+h6_kernel=("6.6.y")
+specific_6xy=("6.6.y" "6.1.y")
+specific_5xy=("5.15.y" "5.10.y" "5.4.y")
+specific_kernel=()
+# Set the list of kernels used by default(Selectable version)
+stable_kernel=("6.1.y" "5.15.y")
 flippy_kernel=(${stable_kernel[@]})
 dev_kernel=(${stable_kernel[@]})
 beta_kernel=(${stable_kernel[@]})
-specific_kernel=()
 # Set to automatically use the latest kernel
 auto_kernel="true"
 
@@ -220,8 +223,8 @@ init_var() {
             fi
             ;;
         -s | --Size)
-            if [[ -n "${2}" && "${2}" -ge "512" ]]; then
-                root_mb="${2}"
+            if [[ -n "${2}" ]]; then
+                img_mb="${2}"
                 shift
             else
                 error_msg "Invalid -s parameter [ ${2} ]!"
@@ -241,6 +244,16 @@ init_var() {
         esac
         shift
     done
+
+    # Set the image size, such as [ -s 512/2560 ] or [ -s 2560 ]
+    [[ -n "${img_mb}" ]] && {
+        if [[ "${img_mb}" =~ / ]]; then
+            boot_mb="${img_mb%%/*}"
+            root_mb="${img_mb##*/}"
+        else
+            root_mb="${img_mb}"
+        fi
+    }
 }
 
 check_data() {
@@ -274,7 +287,7 @@ check_data() {
     # Get a list of kernel
     kernel_from=($(
         cat ${model_conf} |
-            sed -e 's/NA//g' -e 's/NULL//g' -e 's/[ ][ ]*//g' -e 's/\.y/\.1/g' |
+            sed -e 's/NA//g' -e 's/NULL//g' -e 's/[ ][ ]*//g' |
             grep -E "^[^#].*${board_list}$" | awk -F':' '{print $9}' |
             sort -u | xargs
     ))
@@ -287,15 +300,21 @@ check_data() {
 
     # The [ specific kernel ], Use the [ kernel version number ], such as 5.15.y, 6.1.y, etc. default download from [ kernel_stable ].
     [[ "${auto_kernel}" == "true" || "${#specific_kernel[@]}" -eq "0" ]] && {
-        specific_kernel=($(echo ${kernel_from[@]} | sed -e 's/[ ][ ]*/\n/g' | grep -E "^[0-9]+" | sort -u | xargs))
+        specific_kernel=($(
+            echo ${kernel_from[@]} |
+                sed -e 's/[ ][ ]*/\n/g' -e 's/_/\n/g' |
+                grep -E "^[1-9].[0-9]+" |
+                sort -u | xargs
+        ))
     }
 
     # The [ suffix ] of KERNEL_TAGS starts with a [ letter ], such as kernel_stable, kernel_rk3588, etc.
-    tags_list=($(echo ${kernel_from[@]} | sed -e 's/[ ][ ]*/\n/g' | grep -E "^[a-z]" | sort -u | xargs))
+    tags_list=($(echo ${kernel_from[@]} | sed -e 's/[ ][ ]*/\n/g' | grep -E "^[a-z]|(.x.)" | sort -u | xargs))
     # Add the specific kernel to the list
     [[ "${#specific_kernel[@]}" -ne "0" ]] && tags_list=(${tags_list[@]} "specific")
     # Check the kernel list
     [[ "${#tags_list[@]}" -eq "0" ]] && error_msg "The [ tags_list ] is missing, stop building."
+    echo -e "${INFO} The kernel tags list: [ ${tags_list[@]} ]"
 
     # Convert kernel repository address to api format
     [[ "${kernel_repo}" =~ ^https: ]] && kernel_repo="$(echo ${kernel_repo} | awk -F'/' '{print $4"/"$5}')"
@@ -430,6 +449,14 @@ query_kernel() {
             rk3588) down_kernel_list=(${rk3588_kernel[@]}) ;;
             rk35xx) down_kernel_list=(${rk35xx_kernel[@]}) ;;
             h6) down_kernel_list=(${h6_kernel[@]}) ;;
+            5.x.y)
+                down_kernel_list=(${specific_5xy[@]})
+                kd="${specific_tags}"
+                ;;
+            6.x.y)
+                down_kernel_list=(${specific_6xy[@]})
+                kd="${specific_tags}"
+                ;;
             specific)
                 down_kernel_list=(${specific_kernel[@]})
                 kd="${specific_tags}"
@@ -474,9 +501,9 @@ query_kernel() {
             rk3588) rk3588_kernel=(${tmp_arr_kernels[@]}) ;;
             rk35xx) rk35xx_kernel=(${tmp_arr_kernels[@]}) ;;
             h6) h6_kernel=(${tmp_arr_kernels[@]}) ;;
-            specific)
-                specific_kernel=(${tmp_arr_kernels[@]})
-                ;;
+            5.x.y) specific_5xy=(${tmp_arr_kernels[@]}) ;;
+            6.x.y) specific_6xy=(${tmp_arr_kernels[@]}) ;;
+            specific) specific_kernel=(${tmp_arr_kernels[@]}) ;;
             *) error_msg "Invalid tags." ;;
             esac
 
@@ -518,6 +545,14 @@ download_kernel() {
             rk3588) down_kernel_list=(${rk3588_kernel[@]}) ;;
             rk35xx) down_kernel_list=(${rk35xx_kernel[@]}) ;;
             h6) down_kernel_list=(${h6_kernel[@]}) ;;
+            5.x.y)
+                down_kernel_list=(${specific_5xy[@]})
+                kd="${specific_tags}"
+                ;;
+            6.x.y)
+                down_kernel_list=(${specific_6xy[@]})
+                kd="${specific_tags}"
+                ;;
             specific)
                 down_kernel_list=(${specific_kernel[@]})
                 kd="${specific_tags}"
@@ -1104,7 +1139,15 @@ loop_make() {
             rk3588) kernel_list=(${rk3588_kernel[@]}) ;;
             rk35xx) kernel_list=(${rk35xx_kernel[@]}) ;;
             h6) kernel_list=(${h6_kernel[@]}) ;;
-            [0-9]*)
+            5.x.y)
+                kernel_list=(${specific_5xy[@]})
+                kd="${specific_tags}"
+                ;;
+            6.x.y)
+                kernel_list=(${specific_6xy[@]})
+                kd="${specific_tags}"
+                ;;
+            [1-9].[0-9]*)
                 kernel_list=(${specific_kernel[@]})
                 kd="${specific_tags}"
                 ;;
@@ -1117,7 +1160,7 @@ loop_make() {
                     kernel="${k}"
 
                     # Skip inapplicable kernels
-                    if [[ "${KERNEL_TAGS}" =~ ^[0-9]{1,2}\.[0-9]+ ]]; then
+                    if [[ "${KERNEL_TAGS}" =~ ^[1-9].[0-9]+ ]]; then
                         [[ "${kernel}" != "$(echo ${KERNEL_TAGS} | awk -F'.' '{print $1"."$2"."}')"* ]] && {
                             echo -e "(${j}.${i}) ${NOTE} The [ ${board} ] device cannot use [ ${kd}/${kernel} ] kernel, skip."
                             let i++
@@ -1126,7 +1169,7 @@ loop_make() {
                     fi
 
                     # Check disk space size
-                    echo -ne "(${j}.${i}) Start making OpenWrt [\033[92m ${board} - ${kd}/${kernel} \033[0m]. "
+                    echo -ne "(${j}.${i}) Start making OpenWrt [\033[92m ${board} - ${KERNEL_TAGS}/${kernel} \033[0m]. "
                     now_remaining_space="$(df -Tk ${make_path} | grep '/dev/' | awk '{print $5}' | echo $(($(xargs) / 1024 / 1024)))"
                     if [[ "${now_remaining_space}" -le "3" ]]; then
                         echo -e "${WARNING} Remaining space is less than 3G, exit this build."

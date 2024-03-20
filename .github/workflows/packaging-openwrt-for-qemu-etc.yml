@@ -51,15 +51,17 @@ on:
       openwrt_kernel:
         description: "Select kernel version"
         required: false
-        default: "5.15.1_6.1.1"
+        default: "6.1.y_5.15.y"
         type: choice
         options:
-          - 5.4.1_5.10.1
-          - 5.15.1_6.1.1
-          - 5.4.1
-          - 5.10.1
-          - 5.15.1
-          - 6.1.1
+          - 5.4.y
+          - 5.10.y
+          - 5.15.y
+          - 6.1.y
+          - 6.6.y
+          - 6.1.y_6.6.y
+          - 6.1.y_5.15.y
+          - 5.4.y_5.10.y
       kernel_repo:
         description: "Set the kernel repository"
         required: false
@@ -219,5 +221,7 @@ jobs:
             - Default WIFI password: none
             ### Install to EMMC
             - Login to OpenWrt → System → Amlogic Service → Install OpenWrt
+            ### OpenWrt source code
+            - [lede](https://github.com/coolsnowwolf/lede)
             ### OpenWrt Image Verification
             - sha256sum
