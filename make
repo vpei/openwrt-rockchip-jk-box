@@ -94,7 +94,7 @@ specific_6xy=("6.6.y" "6.1.y")
 specific_5xy=("5.15.y" "5.10.y" "5.4.y")
 specific_kernel=()
 # Set the list of kernels used by default(Selectable version)
-stable_kernel=("6.1.y" "5.15.y")
+stable_kernel=("6.6.y" "6.1.y")
 flippy_kernel=(${stable_kernel[@]})
 dev_kernel=(${stable_kernel[@]})
 beta_kernel=(${stable_kernel[@]})
@@ -632,6 +632,7 @@ confirm_version() {
 
     # Replace custom kernel tags
     [[ -n "${kernel_usage}" && "${KERNEL_TAGS}" == "${default_tags}" ]] && KERNEL_TAGS="${kernel_usage}"
+    [[ "${KERNEL_TAGS}" =~ ^[1-9]+ ]] && KERNEL_DOWN_TAGS="stable" || KERNEL_DOWN_TAGS="${KERNEL_TAGS}"
 }
 
 make_image() {
@@ -1047,8 +1048,10 @@ EOF
         sed -e "s/macaddr=.*/macaddr=${random_macaddr}:06/" "brcmfmac43456-sdio.txt" >"brcmfmac43456-sdio.amlogic,sm1.txt"
         # x96max plus v5.1 (ip1001m phy) adopts am7256 (brcm4354)
         sed -e "s/macaddr=.*/macaddr=${random_macaddr}:07/" "brcmfmac4354-sdio.txt" >"brcmfmac4354-sdio.amlogic,sm1.txt"
+        # panther x2 AP6212A
+        sed -e "s/macaddr=.*/macaddr=${random_macaddr}:08/" "brcmfmac43430-sdio.txt" >"brcmfmac43430-sdio.panther,x2.txt"
         # ct2000 s922x is brm4359
-        sed -i "s/macaddr=.*/macaddr=${random_macaddr}:08/" "brcmfmac4359-sdio.ali,ct2000.txt"
+        sed -i "s/macaddr=.*/macaddr=${random_macaddr}:09/" "brcmfmac4359-sdio.ali,ct2000.txt"
     )
 
     # Add firmware version information to the terminal page
@@ -1069,7 +1072,7 @@ EOF
     echo "FDTFILE='${FDTFILE}'" >>${op_release}
     echo "FAMILY='${FAMILY}'" >>${op_release}
     echo "BOARD='${board}'" >>${op_release}
-    echo "KERNEL_TAGS='${KERNEL_TAGS}'" >>${op_release}
+    echo "KERNEL_TAGS='${KERNEL_DOWN_TAGS}'" >>${op_release}
     echo "KERNEL_VERSION='${kernel}'" >>${op_release}
     echo "BOOT_CONF='${BOOT_CONF}'" >>${op_release}
     echo "MAINLINE_UBOOT='/lib/u-boot/${MAINLINE_UBOOT}'" >>${op_release}

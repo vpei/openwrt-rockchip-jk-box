@@ -1,6 +1,5 @@
-# The default order of phy interfaces for H88K is
-# eth1(2.5G) eth0(1G)
-# swap to eth0(2.5G) eth1(1G)
+# The default order of phy interfaces for Radxa ROCK5B is
+# eth0(2.5G)
 
 . /lib/functions/uci-defaults.sh
 . /lib/functions/system.sh
@@ -62,9 +61,12 @@ json_is_a network object && exit 0
 # Init LAN and WAN
 LAN_MAC=$(generate_mac)
 WAN_MAC=$(macaddr_add $LAN_MAC +1)
-ucidef_set_interfaces_lan_wan 'eth0 eth1' 'eth2'
+ucidef_set_interface_lan 'eth0'
 ucidef_set_interface_macaddr "lan" $LAN_MAC
-ucidef_set_interface_macaddr "wan" $WAN_MAC
+if [ -d "/sys/class/net/eth1" ];then
+    ucidef_set_interface_wan 'eth1'
+    ucidef_set_interface_macaddr "wan" $WAN_MAC
+fi
 
 board_config_flush
 

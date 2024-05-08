@@ -47,6 +47,7 @@ on:
           - h69k
           - h88k
           - h88k-v3
+          - hs530r
           - hugsun-x99
           - ipc-r
           - king3399
@@ -125,6 +126,7 @@ on:
           - s912-m8s-pro
           - s912-nexbox-a1
           - s912-nexbox-a2
+          - s912-onecloudpro
           - s912-phicomm-t1
           - s912-t95z-plus
           - s912-tx8-max
@@ -155,7 +157,7 @@ on:
       openwrt_kernel:
         description: "Select kernel version"
         required: false
-        default: "6.1.y_5.15.y"
+        default: "6.1.y_6.6.y"
         type: choice
         options:
           - 5.4.y
@@ -164,8 +166,7 @@ on:
           - 6.1.y
           - 6.6.y
           - 6.1.y_6.6.y
-          - 6.1.y_5.15.y
-          - 5.4.y_5.10.y
+          - 5.15.y_5.10.y
       auto_kernel:
         description: "Auto use the latest kernel"
         required: false
