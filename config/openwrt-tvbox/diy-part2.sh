@@ -63,6 +63,9 @@ rm -rf files/kuaicdn/res && mkdir files/kuaicdn/res && wget --no-check-certifica
 sed -i 's#\\/data\\/storage\\/#\\/mnt\\/sda1\\/#' files/kuaicdn/app/ipes/var/db/ipes/happ-conf/custom.yml
 # echo -e "args:\n - '/tmp/data1'\n - '/tmp/data1'" > ipes/var/db/ipes/happ-conf/custom.yml
 
+# 错误解决libpcre升级到libpcre2问题
+sed -i 's/libpcre/libpcre2/g' feeds/telephony/net/freeswitch/Makefile
+
 # Add third-party software packages (The entire repository)
 git clone https://github.com/vpei/vpe01.git package/vpei
 
