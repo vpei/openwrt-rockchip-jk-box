@@ -16,7 +16,6 @@ config dnsmasq
 	option dnsseccheckunsigned '0'
 	option rebind_protection '0'
 	list notinterface 'zerotier'
-	option domainneeded '1'
 	list server '127.0.0.1#6053'
 	option noresolv '1'
 
@@ -44,4 +43,8 @@ config odhcpd 'odhcpd'
 	option leasefile '/tmp/hosts/odhcpd'
 	option leasetrigger '/usr/sbin/odhcpd-update'
 	option loglevel '4'
+
+config domain
+	option name 'movie.vmess.com'
+	option ip '192.168.6.254'
 
