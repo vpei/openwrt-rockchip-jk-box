@@ -50,6 +50,7 @@ on:
           - h69k
           - h88k
           - h88k-v3
+          - h96-max-m2
           - hs530r
           - hugsun-x99
           - ipc-r
@@ -150,6 +151,7 @@ on:
           - seewo-sv21
           - smart-am40
           - station-m1
+          - swan1-w28
           - sw799
           - tanix-tx6
           - tb-ls3399
