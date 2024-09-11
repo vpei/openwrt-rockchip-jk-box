@@ -70,6 +70,7 @@ arch_info="$(uname -m)"
 host_release="$(cat /etc/os-release | grep '^VERSION_CODENAME=.*' | cut -d'=' -f2)"
 # Add custom OpenWrt firmware information
 op_release="etc/flippy-openwrt-release"
+ophub_release_file="etc/ophub-release"
 
 # Dependency files download repository
 depends_repo="https://github.com/ophub/amlogic-s9xxx-armbian"
@@ -86,7 +87,7 @@ kernel_repo="https://github.com/ophub/kernel"
 default_tags="stable"
 kernel_usage=""
 # Set the list of kernels used by default(Selectable version)
-stable_kernel=("6.6.y")
+stable_kernel=("6.6.y" "6.1.y")
 flippy_kernel=(${stable_kernel[@]})
 dev_kernel=(${stable_kernel[@]})
 beta_kernel=(${stable_kernel[@]})
@@ -99,6 +100,14 @@ specific_5xy=("5.15.y" "5.10.y" "5.4.y")
 auto_kernel="true"
 # Initialize the kernel array
 declare -A tags_list
+
+# Set the Amlogic's u-boot series(u-boot-xxx.bin)
+uboot_meson_gxl=("p201.bin" "p212.bin" "s905x-s912.bin" "n1.bin" "r3300l.bin")
+uboot_meson_gxm=("p212.bin" "s905x-s912.bin" "zyxq.bin")
+uboot_meson_g12a=("x96max.bin" "e900v22c.bin")
+uboot_meson_g12b=("gtking.bin" "gtkingpro.bin" "gtkingpro-rev-a.bin" "s905x2-s922.bin")
+uboot_meson_sm1=("x96maxplus.bin" "ugoos-x3.bin" "tx3-qz.bin" "tx3-bz.bin" "skyworth-lb2004.bin")
+uboot_meson_gxbb=("p201.bin" "s905.bin")
 
 # Initialize the build device
 make_board="all"
@@ -264,7 +273,7 @@ check_data() {
     cat ${model_conf} |
         sed -e 's/NULL/NA/g' -e 's/[ ][ ]*//g' |
         grep -E "^[^#ar].*" |
-        awk -F':' '{if ($6 != "NA") $6 = "/lib/u-boot/"$6; if ($7 != "NA") $7 = "/lib/u-boot/"$7; NF = 8; print}' OFS=':' \
+        awk -F':' '{if ($6 != "NA") $6 = "/lib/u-boot/"$6; if ($7 != "NA") $7 = "/lib/u-boot/"$7; NF = 12; print}' OFS=':' \
             >${model_txt}
 
     # Get a list of build devices
@@ -605,6 +614,9 @@ confirm_version() {
     [[ -n "${MAINLINE_UBOOT}" ]] && RECORD_MAINLINE_UBOOT="/lib/u-boot/${MAINLINE_UBOOT}" || RECORD_MAINLINE_UBOOT=""
     [[ -n "${BOOTLOADER_IMG}" ]] && RECORD_BOOTLOADER_IMG="/lib/u-boot/${BOOTLOADER_IMG}" || RECORD_BOOTLOADER_IMG=""
     [[ -n "${TRUST_IMG}" ]] && RECORD_TRUST_IMG="/lib/u-boot/${TRUST_IMG}" || RECORD_TRUST_IMG=""
+    # Set the Amlogic u-boot series
+    family_rename="${FAMILY//-/_}"
+    eval "amlogic_uboot=(\${uboot_${family_rename}[@]})"
 
     # Get the kernel tags and version
     conf_kernel_tags="${KERNEL_TAGS%%/*}"
@@ -790,8 +802,16 @@ extract_openwrt() {
     rm -rf ${tag_rootfs}/lib/u-boot/*
     [[ -d "${bootloader_path}" ]] && cp -af --no-preserve=ownership ${bootloader_path}/* ${tag_rootfs}/lib/u-boot
 
-    # Copy the overload files
-    [[ "${PLATFORM}" == "amlogic" ]] && cp -rf ${uboot_path}/${PLATFORM}/overload/* ${tag_bootfs}
+    # Copy the Amlogic overload files
+    [[ "${PLATFORM}" == "amlogic" ]] && {
+        for au in "${amlogic_uboot[@]}"; do
+            if [[ -f "${uboot_path}/${PLATFORM}/overload/u-boot-${au}" ]]; then
+                cp -f ${uboot_path}/${PLATFORM}/overload/u-boot-${au} ${tag_bootfs}
+            else
+                error_msg "The [ u-boot-${au} ] file is missing in the [ ${uboot_path}/${PLATFORM}/overload ] directory."
+            fi
+        done
+    }
 
     # Remove the .git directories
     rm -rf $(find ${tmp_path} -type d -name '.git')
@@ -1087,12 +1107,16 @@ EOF
     echo "BUILDER_NAME='${builder_name}'" >>${op_release}
     echo "CONTRIBUTORS='${CONTRIBUTORS}'" >>${op_release}
     echo "PACKAGED_DATE='$(date +%Y-%m-%d)'" >>${op_release}
+    # Creating an Alias
+    ln -sf ${op_release#*/} ${ophub_release_file}
 
-    cd ${current_path}
+    # Remove the menus that are not applicable in the model
+    install_menu=$(echo "${model_txt}" | awk -F'/' '{print $(NF-1)"/"$NF}')
+    grep -E ":${FAMILY}:" ${install_menu} | cut -d':' -f1-8 >temp.txt && mv -f temp.txt ${install_menu}
 
     # Create snapshot
-    mkdir -p ${tag_rootfs}/.snapshots
-    btrfs subvolume snapshot -r ${tag_rootfs}/etc ${tag_rootfs}/.snapshots/etc-000 >/dev/null 2>&1
+    mkdir -p .snapshots
+    btrfs subvolume snapshot -r etc .snapshots/etc-000 >/dev/null 2>&1
 
     sync && sleep 3
 }
