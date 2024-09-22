@@ -69,9 +69,9 @@ sed -i 's/libpcre/libpcre2/g' feeds/telephony/net/freeswitch/Makefile
 # Add third-party software packages (The entire repository)
 git clone https://github.com/vpei/vpe01.git package/vpei
 
-# Add luci-app-amlogic
-rm -rf package/luci-app-amlogic
-git clone https://github.com/vpei/luci-app-amlogic.git package/luci-app-amlogic
+# # Add luci-app-amlogic
+# rm -rf package/luci-app-amlogic
+# git clone https://github.com/vpei/luci-app-amlogic.git package/luci-app-amlogic
 
 # 生成快捷方式
 # ln -s /mnt/sda3/clash/config.yaml files/www/config.yaml
