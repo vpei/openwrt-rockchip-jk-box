@@ -1,5 +1,9 @@
 
-config zerotier 'sample_config'
+config zerotier 'global'
 	option nat '1'
 	option enabled '1'
 	list join '17d709436c92c870'
+
+config network
+	option id '17d709436c92c870'
+
