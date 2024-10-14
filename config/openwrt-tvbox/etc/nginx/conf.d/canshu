@@ -1,0 +1,59 @@
+$remote_addr;
+　　存放了客户端的地址，注意是客户端的公网IP，也就是一家人访问一个网站，则会显示为路由器的公网IP。
+
+$args；
+　　#变量中存放了URL中的指令，例如http://node101.yinzhengjie.org.cn/main/index.do?id=20190221&partner=search中的id=20190221&partner=search
+
+$document_root；
+　　保存了针对当前资源的请求的系统根目录，如/apps/nginx/html。
+
+
+$document_uri；
+　　保存了当前请求中不包含指令的URI，注意是不包含请求的指令，比如http://node101.yinzhengjie.org.cn/main/index.do?id=20190221&partner=search会被定义为/main/index.do。
+
+$host；
+　　存放了请求的host名称。
+
+$http_user_agent；
+　　客户端浏览器的详细信息
+
+$http_cookie；
+　　客户端的cookie信息。
+
+limit_rate 10240;
+echo $limit_rate;
+　　如果nginx服务器使用limit_rate配置了显示网络速率，则会显示，如果没有设置， 则显示0。
+
+$remote_port；
+　　客户端请求Nginx服务器时随机打开的端口，这是每个客户端自己的端口。
+
+$remote_user；
+　　已经经过Auth Basic Module验证的用户名。
+
+$request_body_file；
+　　做反向代理时发给后端服务器的本地资源的名称。
+
+$request_method；
+　　请求资源的方式，GET/PUT/DELETE等
+
+
+$request_filename；
+　　当前请求的资源文件的路径名称，由root或alias指令与URI请求生成的文件绝对路径，如/apps/nginx/html/main/index.html
+
+$request_uri；
+　　包含请求参数的原始URI，不包含主机名，如：/main/index.do?id=20190221&partner=search 。
+
+$scheme；
+　　请求的协议，如ftp，https，http等。
+
+$server_protocol；
+　　保存了客户端请求资源使用的协议的版本，如HTTP/1.0，HTTP/1.1，HTTP/2.0等。
+
+$server_addr；
+　　保存了服务器的IP地址。
+
+$server_name；
+　　请求的服务器的主机名。
+
+$server_port；
+　　请求的服务器的端口号。

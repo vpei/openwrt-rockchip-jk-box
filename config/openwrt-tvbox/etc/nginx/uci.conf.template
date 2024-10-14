@@ -158,8 +158,8 @@ http {
 	proxy_buffers            4 64k;	# proxy_buffers缓冲区，网页平均在64k以下
 	proxy_busy_buffers_size 128k;	# 高负荷下缓冲大小（proxy_buffers*2）
 	proxy_temp_file_write_size 128k;
-	proxy_temp_path   /mnt/mmcblk0p4/cache/temp;
-	proxy_cache_path  /mnt/mmcblk0p4/cache/path levels=1:2 keys_zone=cache_one:256m inactive=3d max_size=5g;
+	proxy_temp_path   /mnt/sda3/cache/temp;
+	proxy_cache_path  /mnt/sda3/cache/path levels=1:2 keys_zone=cache_one:256m inactive=3d max_size=5g;
 	# 这一段就是反代的一些缓存和设置，最后一句cache_one为缓存区名字，100m是内存占用， 3d是3天删除， 5g是缓存空间,
 
 	lingering_close always;			# always表示关闭用户连接前必须无条件地处理连接上所有用户发送的数据。off表示关闭连接时完全不管连接上是否已经有准备就绪的来自用户的数据。on是中间值，一般情况下在关闭连接前都会处理连接上的用户发送的数据，除了有些情况下在业务上认定这之后的数据是不必要的。
