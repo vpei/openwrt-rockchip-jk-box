@@ -248,12 +248,6 @@ config domain-rule
 	option forwarding_domain_set_file '/etc/smartdns/domain-set/chinalist.txt'
 
 config download-file
-	option name 'overseas.txt'
-	option url 'https://raw.githubusercontent.com/ruijzhan/chnroute/master/gfwlist.txt'
-	option type 'list'
-	option desc 'overseas.txt'
-
-config download-file
 	option name 'chinalist.txt'
 	option url 'https://raw.githubusercontent.com/Rongronggg9/chinalist/main/chinalist_plain.txt'
 	option type 'list'

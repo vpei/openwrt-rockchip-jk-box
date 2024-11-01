@@ -1,0 +1,54 @@
+
+config init
+	option stdout '1'
+	option stderr '1'
+	option respawn '1'
+	option user 'root'
+	option group 'root'
+
+config conf 'common'
+	option name 'common'
+	option server_port '7000'
+	option log_level 'info'
+	option log_max_days '1'
+	option protocol 'tcp'
+	option admin_user 'root'
+	option admin_pwd 'asdfadsf'
+	option admin_addr '127.0.0.1'
+	option admin_port '0'
+	option heartbeat_interval '30'
+	option heartbeat_timeout '90'
+	option server_addr 'v.vmess.com'
+	option log_file '/tmp/frpc.log'
+	option token 'v.vmess.com'
+	option disable_log_color 'true'
+	option tls_enable 'false'
+	option login_fail_exit 'false'
+
+config conf
+	option type 'http'
+	option use_encryption 'false'
+	option use_compression 'false'
+	option local_ip '127.0.0.1'
+	option local_port '80'
+	option custom_domains 'ff.vmess.com'
+	option name 'dd_vmess_com_http'
+
+config conf
+	option type 'https'
+	option use_encryption 'false'
+	option use_compression 'false'
+	option local_ip '127.0.0.1'
+	option local_port '443'
+	option name 'dd_vmess_com_https'
+	option custom_domains 'dd.vmess.com'
+
+config conf
+	option name 'vmess_6802_tcp'
+	option type 'tcp'
+	option use_encryption 'false'
+	option use_compression 'false'
+	option local_port '6800'
+	option local_ip '192.168.192.14'
+	option remote_port '6802'
+

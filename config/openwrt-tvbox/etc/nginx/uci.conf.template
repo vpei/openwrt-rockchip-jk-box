@@ -37,11 +37,9 @@ http {
 	# autoindex on;				# 自动索引，浏览文件夹
 
 	# Log Format 声明日志格式，request_length用来输出每一个请求的大小(请求行+请求头+请求体)
-	log_format		cloudflare '$remote_addr - $remote_user [$time_local] "$request" $status $body_bytes_sent "$http_referer" "$http_user_agent" $http_cf_ray $http_cf_connecting_ip $http_x_forwarded_for $http_x_forwarded_proto $http_true_client_ip $http_cf_ipcountry $http_cf_visitor $http_cdn_loop';
-
-	# 声明日志格式，request_length用来输出每一个请求的大小(请求行+请求头+请求体)
-	log_format openwrt	'$request_method $scheme://$host$request_uri => $status'
-											' (${body_bytes_sent}B in ${request_time}s) <- $http_referer';
+	log_format openwrt '$remote_addr - $remote_user [$time_local] "$request" $status $body_bytes_sent "$http_referer" "$http_user_agent" $http_cf_ray '
+							'$http_cf_connecting_ip $http_x_forwarded_for $http_x_forwarded_proto $http_true_client_ip $http_cf_ipcountry $http_cf_visitor $http_cdn_loop $request_method '
+							'$scheme://$host$request_uri => $status (${body_bytes_sent}B in ${request_time}s) <- $http_referer';
 
 	# 设置日志模式
 	log_format  main  '$remote_addr - $remote_user [$time_local] "$request" '
@@ -141,13 +139,6 @@ http {
 	# gzip_proxied   expired no-cache no-store private auth;
 	gzip_disable   "MSIE [1-6]\.";
 
-	# 这一段是为了wordpress的功能
-	map $http_cookie $logged_in {
-		default 0;
-		~SESS 1; # Drupal session cookie
-		~wordpress_logged_in 1; # WordPress session cookie
-	}
-
 	# 下面这段就是反代缓存设置了
 	server_tokens off;
 	proxy_ignore_client_abort on;	# on开启，则服务器会忽略客户端中断，一直等着代理服务执行返回。默认是关闭的，即请求过程中如果客户端端主动关闭请求或者客户端网络断掉，那么Nginx会记录499。 499 ：client has closed connection
@@ -158,8 +149,8 @@ http {
 	proxy_buffers            4 64k;	# proxy_buffers缓冲区，网页平均在64k以下
 	proxy_busy_buffers_size 128k;	# 高负荷下缓冲大小（proxy_buffers*2）
 	proxy_temp_file_write_size 128k;
-	proxy_temp_path   /mnt/sda3/cache/temp;
-	proxy_cache_path  /mnt/sda3/cache/path levels=1:2 keys_zone=cache_one:256m inactive=3d max_size=5g;
+	# proxy_temp_path   /mnt/sda3/cache/temp;
+	# proxy_cache_path  /mnt/sda3/cache/path levels=1:2 keys_zone=cache_one:256m inactive=3d max_size=5g;
 	# 这一段就是反代的一些缓存和设置，最后一句cache_one为缓存区名字，100m是内存占用， 3d是3天删除， 5g是缓存空间,
 
 	lingering_close always;			# always表示关闭用户连接前必须无条件地处理连接上所有用户发送的数据。off表示关闭连接时完全不管连接上是否已经有准备就绪的来自用户的数据。on是中间值，一般情况下在关闭连接前都会处理连接上的用户发送的数据，除了有些情况下在业务上认定这之后的数据是不必要的。

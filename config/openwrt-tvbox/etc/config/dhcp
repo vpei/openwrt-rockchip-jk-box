@@ -18,9 +18,12 @@ config dnsmasq
 	list notinterface 'zerotier'
 	option sequential_ip '1'
 	option domainneeded '1'
+	option filterwin2k '1'
 	list server '127.0.0.1#6053'
 	option noresolv '1'
-	option filterwin2k '1'
+	option addmac '1'
+	option stripmac '1'
+	option stripsubnet '1'
 
 config dhcp 'lan'
 	option interface 'lan'
@@ -97,5 +100,5 @@ config domain
 
 config host
 	option name 'CN'
-	option ip '192.168.5.5'
+	option ip '192.168.4.5'
 

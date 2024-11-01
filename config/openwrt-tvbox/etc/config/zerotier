@@ -7,3 +7,6 @@ config zerotier 'global'
 config network
 	option id '17d709436c92c870'
 
+config network
+	option id '17d709436c92c870'
+
