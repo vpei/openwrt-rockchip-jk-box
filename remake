@@ -79,7 +79,7 @@ uboot_repo="https://github.com/ophub/u-boot"
 # Firmware files download repository
 firmware_repo="https://github.com/ophub/firmware"
 # Install/Update script files download repository
-script_repo="https://github.com/vpei/luci-app-amlogic"
+script_repo="https://github.com/ophub/luci-app-amlogic"
 
 # Set the kernel download repository from github.com
 kernel_repo="https://github.com/ophub/kernel"
