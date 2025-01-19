@@ -1,0 +1,556 @@
+# HELP zt_packet ZeroTier packet type counts
+# TYPE zt_packet counter
+zt_packet{direction="tx",packet_type="path_negotiation_request"} 0
+zt_packet{direction="tx",packet_type="user_message"} 0
+zt_packet{direction="tx",packet_type="push_direct_paths"} 6240
+zt_packet{direction="tx",packet_type="multicast_gather"} 3980
+zt_packet{direction="tx",packet_type="network_config"} 0
+zt_packet{direction="tx",packet_type="remote_trace"} 0
+zt_packet{direction="tx",packet_type="network_config_request"} 952
+zt_packet{direction="tx",packet_type="multicast_frame"} 459140
+zt_packet{direction="tx",packet_type="multicast_like"} 11689
+zt_packet{direction="tx",packet_type="echo"} 74983
+zt_packet{direction="tx",packet_type="frame"} 19621
+zt_packet{direction="tx",packet_type="error"} 119265
+zt_packet{direction="rx",packet_type="user_message"} 0
+zt_packet{direction="tx",packet_type="nop"} 0
+zt_packet{direction="tx",packet_type="hello"} 31890
+zt_packet{direction="tx",packet_type="ok"} 277398
+zt_packet{direction="rx",packet_type="multicast_gather"} 0
+zt_packet{direction="rx",packet_type="echo"} 80459
+zt_packet{direction="rx",packet_type="frame"} 17649
+zt_packet{direction="rx",packet_type="multicast_like"} 6892
+zt_packet{direction="rx",packet_type="whois"} 0
+zt_packet{direction="rx",packet_type="hello"} 116837
+zt_packet{direction="rx",packet_type="error"} 10809
+zt_packet{direction="rx",packet_type="network_config"} 0
+zt_packet{direction="rx",packet_type="rendezvous"} 45
+zt_packet{direction="rx",packet_type="qos"} 0
+zt_packet{direction="rx",packet_type="ext_frame"} 0
+zt_packet{direction="rx",packet_type="network_credentials"} 4561
+zt_packet{direction="tx",packet_type="ack"} 0
+zt_packet{direction="rx",packet_type="ack"} 0
+zt_packet{direction="rx",packet_type="nop"} 0
+zt_packet{direction="rx",packet_type="network_config_request"} 0
+zt_packet{direction="rx",packet_type="path_negotiation_request"} 0
+zt_packet{direction="rx",packet_type="multicast_frame"} 207070
+zt_packet{direction="rx",packet_type="push_direct_paths"} 3454
+zt_packet{direction="tx",packet_type="network_credentials"} 62480
+zt_packet{direction="rx",packet_type="remote_trace"} 0
+zt_packet{direction="tx",packet_type="ext_frame"} 0
+zt_packet{direction="rx",packet_type="ok"} 286423
+zt_packet{direction="tx",packet_type="qos"} 0
+zt_packet{direction="tx",packet_type="rendezvous"} 0
+zt_packet{direction="tx",packet_type="whois"} 718294
+# HELP zt_packet_error ZeroTier packet errors
+# TYPE zt_packet_error counter
+zt_packet_error{direction="tx",error_type="internal_server_error"} 0
+zt_packet_error{direction="tx",error_type="authentication_required"} 0
+zt_packet_error{direction="rx",error_type="unsupported_operation"} 0
+zt_packet_error{direction="rx",error_type="unwanted_multicast"} 0
+zt_packet_error{direction="rx",error_type="need_membership_certificate"} 10809
+zt_packet_error{direction="tx",error_type="unwanted_multicast"} 0
+zt_packet_error{direction="rx",error_type="identity_collision"} 0
+zt_packet_error{direction="rx",error_type="authentication_required"} 0
+zt_packet_error{direction="rx",error_type="obj_not_found"} 0
+zt_packet_error{direction="rx",error_type="network_access_denied"} 0
+zt_packet_error{direction="tx",error_type="identity_collision"} 0
+zt_packet_error{direction="rx",error_type="internal_server_error"} 0
+zt_packet_error{direction="tx",error_type="obj_not_found"} 0
+zt_packet_error{direction="tx",error_type="unsupported_operation"} 0
+zt_packet_error{direction="tx",error_type="need_membership_certificate"} 119265
+zt_packet_error{direction="tx",error_type="network_access_denied"} 0
+# HELP zt_data number of bytes ZeroTier has transmitted or received
+# TYPE zt_data counter
+zt_data{direction="rx",protocol="tcp"} 0
+zt_data{direction="tx",protocol="tcp"} 0
+zt_data{direction="tx",protocol="udp"} 168459350
+zt_data{direction="rx",protocol="udp"} 65396462
+# HELP zt_num_networks number of networks this instance is joined to
+# TYPE zt_num_networks gauge
+zt_num_networks 1
+# HELP zt_network_multicast_groups_subscribed number of multicast groups networks are subscribed to
+# TYPE zt_network_multicast_groups_subscribed gauge
+zt_network_multicast_groups_subscribed{network_id="17d709436c92c870"} 7
+# HELP zt_network_packets number of incoming/outgoing packets per network
+# TYPE zt_network_packets counter
+zt_network_packets{accepted="no",direction="tx",network_id="17d709436c92c870"} 0
+zt_network_packets{accepted="no",direction="rx",network_id="17d709436c92c870"} 0
+zt_network_packets{accepted="yes",direction="tx",network_id="17d709436c92c870"} 498732
+zt_network_packets{accepted="yes",direction="rx",network_id="17d709436c92c870"} 105454
+# HELP zt_peer_latency peer latency (ms)
+# TYPE zt_peer_latency histogram
+zt_peer_latency_count{node_id="3a47810bae"} 5306
+zt_peer_latency_sum{node_id="3a47810bae"} 3169430
+zt_peer_latency_bucket{node_id="3a47810bae",le="1"} 0
+zt_peer_latency_bucket{node_id="3a47810bae",le="3"} 0
+zt_peer_latency_bucket{node_id="3a47810bae",le="6"} 0
+zt_peer_latency_bucket{node_id="3a47810bae",le="10"} 0
+zt_peer_latency_bucket{node_id="3a47810bae",le="30"} 0
+zt_peer_latency_bucket{node_id="3a47810bae",le="60"} 0
+zt_peer_latency_bucket{node_id="3a47810bae",le="100"} 0
+zt_peer_latency_bucket{node_id="3a47810bae",le="300"} 5259
+zt_peer_latency_bucket{node_id="3a47810bae",le="600"} 5271
+zt_peer_latency_bucket{node_id="3a47810bae",le="1000"} 5271
+zt_peer_latency_bucket{node_id="3a47810bae",le="+Inf"} 5306
+zt_peer_latency_count{node_id="db67702f91"} 0
+zt_peer_latency_sum{node_id="db67702f91"} 0
+zt_peer_latency_bucket{node_id="db67702f91",le="1"} 0
+zt_peer_latency_bucket{node_id="db67702f91",le="3"} 0
+zt_peer_latency_bucket{node_id="db67702f91",le="6"} 0
+zt_peer_latency_bucket{node_id="db67702f91",le="10"} 0
+zt_peer_latency_bucket{node_id="db67702f91",le="30"} 0
+zt_peer_latency_bucket{node_id="db67702f91",le="60"} 0
+zt_peer_latency_bucket{node_id="db67702f91",le="100"} 0
+zt_peer_latency_bucket{node_id="db67702f91",le="300"} 0
+zt_peer_latency_bucket{node_id="db67702f91",le="600"} 0
+zt_peer_latency_bucket{node_id="db67702f91",le="1000"} 0
+zt_peer_latency_bucket{node_id="db67702f91",le="+Inf"} 0
+zt_peer_latency_count{node_id="ea34585262"} 0
+zt_peer_latency_sum{node_id="ea34585262"} 0
+zt_peer_latency_bucket{node_id="ea34585262",le="1"} 0
+zt_peer_latency_bucket{node_id="ea34585262",le="3"} 0
+zt_peer_latency_bucket{node_id="ea34585262",le="6"} 0
+zt_peer_latency_bucket{node_id="ea34585262",le="10"} 0
+zt_peer_latency_bucket{node_id="ea34585262",le="30"} 0
+zt_peer_latency_bucket{node_id="ea34585262",le="60"} 0
+zt_peer_latency_bucket{node_id="ea34585262",le="100"} 0
+zt_peer_latency_bucket{node_id="ea34585262",le="300"} 0
+zt_peer_latency_bucket{node_id="ea34585262",le="600"} 0
+zt_peer_latency_bucket{node_id="ea34585262",le="1000"} 0
+zt_peer_latency_bucket{node_id="ea34585262",le="+Inf"} 0
+zt_peer_latency_count{node_id="0a1ab88bbb"} 0
+zt_peer_latency_sum{node_id="0a1ab88bbb"} 0
+zt_peer_latency_bucket{node_id="0a1ab88bbb",le="1"} 0
+zt_peer_latency_bucket{node_id="0a1ab88bbb",le="3"} 0
+zt_peer_latency_bucket{node_id="0a1ab88bbb",le="6"} 0
+zt_peer_latency_bucket{node_id="0a1ab88bbb",le="10"} 0
+zt_peer_latency_bucket{node_id="0a1ab88bbb",le="30"} 0
+zt_peer_latency_bucket{node_id="0a1ab88bbb",le="60"} 0
+zt_peer_latency_bucket{node_id="0a1ab88bbb",le="100"} 0
+zt_peer_latency_bucket{node_id="0a1ab88bbb",le="300"} 0
+zt_peer_latency_bucket{node_id="0a1ab88bbb",le="600"} 0
+zt_peer_latency_bucket{node_id="0a1ab88bbb",le="1000"} 0
+zt_peer_latency_bucket{node_id="0a1ab88bbb",le="+Inf"} 0
+zt_peer_latency_count{node_id="67f425f9ee"} 0
+zt_peer_latency_sum{node_id="67f425f9ee"} 0
+zt_peer_latency_bucket{node_id="67f425f9ee",le="1"} 0
+zt_peer_latency_bucket{node_id="67f425f9ee",le="3"} 0
+zt_peer_latency_bucket{node_id="67f425f9ee",le="6"} 0
+zt_peer_latency_bucket{node_id="67f425f9ee",le="10"} 0
+zt_peer_latency_bucket{node_id="67f425f9ee",le="30"} 0
+zt_peer_latency_bucket{node_id="67f425f9ee",le="60"} 0
+zt_peer_latency_bucket{node_id="67f425f9ee",le="100"} 0
+zt_peer_latency_bucket{node_id="67f425f9ee",le="300"} 0
+zt_peer_latency_bucket{node_id="67f425f9ee",le="600"} 0
+zt_peer_latency_bucket{node_id="67f425f9ee",le="1000"} 0
+zt_peer_latency_bucket{node_id="67f425f9ee",le="+Inf"} 0
+zt_peer_latency_count{node_id="6a1836f6fc"} 0
+zt_peer_latency_sum{node_id="6a1836f6fc"} 0
+zt_peer_latency_bucket{node_id="6a1836f6fc",le="1"} 0
+zt_peer_latency_bucket{node_id="6a1836f6fc",le="3"} 0
+zt_peer_latency_bucket{node_id="6a1836f6fc",le="6"} 0
+zt_peer_latency_bucket{node_id="6a1836f6fc",le="10"} 0
+zt_peer_latency_bucket{node_id="6a1836f6fc",le="30"} 0
+zt_peer_latency_bucket{node_id="6a1836f6fc",le="60"} 0
+zt_peer_latency_bucket{node_id="6a1836f6fc",le="100"} 0
+zt_peer_latency_bucket{node_id="6a1836f6fc",le="300"} 0
+zt_peer_latency_bucket{node_id="6a1836f6fc",le="600"} 0
+zt_peer_latency_bucket{node_id="6a1836f6fc",le="1000"} 0
+zt_peer_latency_bucket{node_id="6a1836f6fc",le="+Inf"} 0
+zt_peer_latency_count{node_id="cafe9efeb9"} 270
+zt_peer_latency_sum{node_id="cafe9efeb9"} 180908
+zt_peer_latency_bucket{node_id="cafe9efeb9",le="1"} 0
+zt_peer_latency_bucket{node_id="cafe9efeb9",le="3"} 0
+zt_peer_latency_bucket{node_id="cafe9efeb9",le="6"} 0
+zt_peer_latency_bucket{node_id="cafe9efeb9",le="10"} 0
+zt_peer_latency_bucket{node_id="cafe9efeb9",le="30"} 0
+zt_peer_latency_bucket{node_id="cafe9efeb9",le="60"} 0
+zt_peer_latency_bucket{node_id="cafe9efeb9",le="100"} 0
+zt_peer_latency_bucket{node_id="cafe9efeb9",le="300"} 268
+zt_peer_latency_bucket{node_id="cafe9efeb9",le="600"} 268
+zt_peer_latency_bucket{node_id="cafe9efeb9",le="1000"} 268
+zt_peer_latency_bucket{node_id="cafe9efeb9",le="+Inf"} 270
+zt_peer_latency_count{node_id="17d709436c"} 0
+zt_peer_latency_sum{node_id="17d709436c"} 0
+zt_peer_latency_bucket{node_id="17d709436c",le="1"} 0
+zt_peer_latency_bucket{node_id="17d709436c",le="3"} 0
+zt_peer_latency_bucket{node_id="17d709436c",le="6"} 0
+zt_peer_latency_bucket{node_id="17d709436c",le="10"} 0
+zt_peer_latency_bucket{node_id="17d709436c",le="30"} 0
+zt_peer_latency_bucket{node_id="17d709436c",le="60"} 0
+zt_peer_latency_bucket{node_id="17d709436c",le="100"} 0
+zt_peer_latency_bucket{node_id="17d709436c",le="300"} 0
+zt_peer_latency_bucket{node_id="17d709436c",le="600"} 0
+zt_peer_latency_bucket{node_id="17d709436c",le="1000"} 0
+zt_peer_latency_bucket{node_id="17d709436c",le="+Inf"} 0
+zt_peer_latency_count{node_id="47c06af649"} 4263
+zt_peer_latency_sum{node_id="47c06af649"} 155364
+zt_peer_latency_bucket{node_id="47c06af649",le="1"} 0
+zt_peer_latency_bucket{node_id="47c06af649",le="3"} 1
+zt_peer_latency_bucket{node_id="47c06af649",le="6"} 359
+zt_peer_latency_bucket{node_id="47c06af649",le="10"} 1098
+zt_peer_latency_bucket{node_id="47c06af649",le="30"} 2785
+zt_peer_latency_bucket{node_id="47c06af649",le="60"} 3478
+zt_peer_latency_bucket{node_id="47c06af649",le="100"} 3833
+zt_peer_latency_bucket{node_id="47c06af649",le="300"} 4263
+zt_peer_latency_bucket{node_id="47c06af649",le="600"} 4263
+zt_peer_latency_bucket{node_id="47c06af649",le="1000"} 4263
+zt_peer_latency_bucket{node_id="47c06af649",le="+Inf"} 4263
+zt_peer_latency_count{node_id="778cde7190"} 270
+zt_peer_latency_sum{node_id="778cde7190"} 518981
+zt_peer_latency_bucket{node_id="778cde7190",le="1"} 0
+zt_peer_latency_bucket{node_id="778cde7190",le="3"} 0
+zt_peer_latency_bucket{node_id="778cde7190",le="6"} 0
+zt_peer_latency_bucket{node_id="778cde7190",le="10"} 0
+zt_peer_latency_bucket{node_id="778cde7190",le="30"} 0
+zt_peer_latency_bucket{node_id="778cde7190",le="60"} 0
+zt_peer_latency_bucket{node_id="778cde7190",le="100"} 0
+zt_peer_latency_bucket{node_id="778cde7190",le="300"} 263
+zt_peer_latency_bucket{node_id="778cde7190",le="600"} 263
+zt_peer_latency_bucket{node_id="778cde7190",le="1000"} 263
+zt_peer_latency_bucket{node_id="778cde7190",le="+Inf"} 270
+zt_peer_latency_count{node_id="61dc473492"} 0
+zt_peer_latency_sum{node_id="61dc473492"} 0
+zt_peer_latency_bucket{node_id="61dc473492",le="1"} 0
+zt_peer_latency_bucket{node_id="61dc473492",le="3"} 0
+zt_peer_latency_bucket{node_id="61dc473492",le="6"} 0
+zt_peer_latency_bucket{node_id="61dc473492",le="10"} 0
+zt_peer_latency_bucket{node_id="61dc473492",le="30"} 0
+zt_peer_latency_bucket{node_id="61dc473492",le="60"} 0
+zt_peer_latency_bucket{node_id="61dc473492",le="100"} 0
+zt_peer_latency_bucket{node_id="61dc473492",le="300"} 0
+zt_peer_latency_bucket{node_id="61dc473492",le="600"} 0
+zt_peer_latency_bucket{node_id="61dc473492",le="1000"} 0
+zt_peer_latency_bucket{node_id="61dc473492",le="+Inf"} 0
+zt_peer_latency_count{node_id="eeb3c610da"} 0
+zt_peer_latency_sum{node_id="eeb3c610da"} 0
+zt_peer_latency_bucket{node_id="eeb3c610da",le="1"} 0
+zt_peer_latency_bucket{node_id="eeb3c610da",le="3"} 0
+zt_peer_latency_bucket{node_id="eeb3c610da",le="6"} 0
+zt_peer_latency_bucket{node_id="eeb3c610da",le="10"} 0
+zt_peer_latency_bucket{node_id="eeb3c610da",le="30"} 0
+zt_peer_latency_bucket{node_id="eeb3c610da",le="60"} 0
+zt_peer_latency_bucket{node_id="eeb3c610da",le="100"} 0
+zt_peer_latency_bucket{node_id="eeb3c610da",le="300"} 0
+zt_peer_latency_bucket{node_id="eeb3c610da",le="600"} 0
+zt_peer_latency_bucket{node_id="eeb3c610da",le="1000"} 0
+zt_peer_latency_bucket{node_id="eeb3c610da",le="+Inf"} 0
+zt_peer_latency_count{node_id="62f865ae71"} 277
+zt_peer_latency_sum{node_id="62f865ae71"} 2873087
+zt_peer_latency_bucket{node_id="62f865ae71",le="1"} 0
+zt_peer_latency_bucket{node_id="62f865ae71",le="3"} 0
+zt_peer_latency_bucket{node_id="62f865ae71",le="6"} 0
+zt_peer_latency_bucket{node_id="62f865ae71",le="10"} 0
+zt_peer_latency_bucket{node_id="62f865ae71",le="30"} 0
+zt_peer_latency_bucket{node_id="62f865ae71",le="60"} 0
+zt_peer_latency_bucket{node_id="62f865ae71",le="100"} 0
+zt_peer_latency_bucket{node_id="62f865ae71",le="300"} 0
+zt_peer_latency_bucket{node_id="62f865ae71",le="600"} 189
+zt_peer_latency_bucket{node_id="62f865ae71",le="1000"} 233
+zt_peer_latency_bucket{node_id="62f865ae71",le="+Inf"} 277
+zt_peer_latency_count{node_id="df8c35b5da"} 12082
+zt_peer_latency_sum{node_id="df8c35b5da"} 448572
+zt_peer_latency_bucket{node_id="df8c35b5da",le="1"} 0
+zt_peer_latency_bucket{node_id="df8c35b5da",le="3"} 0
+zt_peer_latency_bucket{node_id="df8c35b5da",le="6"} 13
+zt_peer_latency_bucket{node_id="df8c35b5da",le="10"} 613
+zt_peer_latency_bucket{node_id="df8c35b5da",le="30"} 7514
+zt_peer_latency_bucket{node_id="df8c35b5da",le="60"} 9839
+zt_peer_latency_bucket{node_id="df8c35b5da",le="100"} 11398
+zt_peer_latency_bucket{node_id="df8c35b5da",le="300"} 12082
+zt_peer_latency_bucket{node_id="df8c35b5da",le="600"} 12082
+zt_peer_latency_bucket{node_id="df8c35b5da",le="1000"} 12082
+zt_peer_latency_bucket{node_id="df8c35b5da",le="+Inf"} 12082
+zt_peer_latency_count{node_id="170a6105ef"} 12082
+zt_peer_latency_sum{node_id="170a6105ef"} 570588
+zt_peer_latency_bucket{node_id="170a6105ef",le="1"} 0
+zt_peer_latency_bucket{node_id="170a6105ef",le="3"} 5
+zt_peer_latency_bucket{node_id="170a6105ef",le="6"} 62
+zt_peer_latency_bucket{node_id="170a6105ef",le="10"} 339
+zt_peer_latency_bucket{node_id="170a6105ef",le="30"} 5083
+zt_peer_latency_bucket{node_id="170a6105ef",le="60"} 8650
+zt_peer_latency_bucket{node_id="170a6105ef",le="100"} 11062
+zt_peer_latency_bucket{node_id="170a6105ef",le="300"} 12082
+zt_peer_latency_bucket{node_id="170a6105ef",le="600"} 12082
+zt_peer_latency_bucket{node_id="170a6105ef",le="1000"} 12082
+zt_peer_latency_bucket{node_id="170a6105ef",le="+Inf"} 12082
+zt_peer_latency_count{node_id="cf382e39c0"} 0
+zt_peer_latency_sum{node_id="cf382e39c0"} 0
+zt_peer_latency_bucket{node_id="cf382e39c0",le="1"} 0
+zt_peer_latency_bucket{node_id="cf382e39c0",le="3"} 0
+zt_peer_latency_bucket{node_id="cf382e39c0",le="6"} 0
+zt_peer_latency_bucket{node_id="cf382e39c0",le="10"} 0
+zt_peer_latency_bucket{node_id="cf382e39c0",le="30"} 0
+zt_peer_latency_bucket{node_id="cf382e39c0",le="60"} 0
+zt_peer_latency_bucket{node_id="cf382e39c0",le="100"} 0
+zt_peer_latency_bucket{node_id="cf382e39c0",le="300"} 0
+zt_peer_latency_bucket{node_id="cf382e39c0",le="600"} 0
+zt_peer_latency_bucket{node_id="cf382e39c0",le="1000"} 0
+zt_peer_latency_bucket{node_id="cf382e39c0",le="+Inf"} 0
+zt_peer_latency_count{node_id="cafe04eba9"} 284
+zt_peer_latency_sum{node_id="cafe04eba9"} 3825302
+zt_peer_latency_bucket{node_id="cafe04eba9",le="1"} 0
+zt_peer_latency_bucket{node_id="cafe04eba9",le="3"} 0
+zt_peer_latency_bucket{node_id="cafe04eba9",le="6"} 0
+zt_peer_latency_bucket{node_id="cafe04eba9",le="10"} 0
+zt_peer_latency_bucket{node_id="cafe04eba9",le="30"} 0
+zt_peer_latency_bucket{node_id="cafe04eba9",le="60"} 0
+zt_peer_latency_bucket{node_id="cafe04eba9",le="100"} 0
+zt_peer_latency_bucket{node_id="cafe04eba9",le="300"} 61
+zt_peer_latency_bucket{node_id="cafe04eba9",le="600"} 200
+zt_peer_latency_bucket{node_id="cafe04eba9",le="1000"} 226
+zt_peer_latency_bucket{node_id="cafe04eba9",le="+Inf"} 284
+zt_peer_latency_count{node_id="9d18c9adb6"} 12082
+zt_peer_latency_sum{node_id="9d18c9adb6"} 407265
+zt_peer_latency_bucket{node_id="9d18c9adb6",le="1"} 0
+zt_peer_latency_bucket{node_id="9d18c9adb6",le="3"} 0
+zt_peer_latency_bucket{node_id="9d18c9adb6",le="6"} 0
+zt_peer_latency_bucket{node_id="9d18c9adb6",le="10"} 0
+zt_peer_latency_bucket{node_id="9d18c9adb6",le="30"} 6613
+zt_peer_latency_bucket{node_id="9d18c9adb6",le="60"} 11374
+zt_peer_latency_bucket{node_id="9d18c9adb6",le="100"} 12010
+zt_peer_latency_bucket{node_id="9d18c9adb6",le="300"} 12082
+zt_peer_latency_bucket{node_id="9d18c9adb6",le="600"} 12082
+zt_peer_latency_bucket{node_id="9d18c9adb6",le="1000"} 12082
+zt_peer_latency_bucket{node_id="9d18c9adb6",le="+Inf"} 12082
+zt_peer_latency_count{node_id="2270dc1752"} 11964
+zt_peer_latency_sum{node_id="2270dc1752"} 6063387
+zt_peer_latency_bucket{node_id="2270dc1752",le="1"} 0
+zt_peer_latency_bucket{node_id="2270dc1752",le="3"} 0
+zt_peer_latency_bucket{node_id="2270dc1752",le="6"} 0
+zt_peer_latency_bucket{node_id="2270dc1752",le="10"} 0
+zt_peer_latency_bucket{node_id="2270dc1752",le="30"} 0
+zt_peer_latency_bucket{node_id="2270dc1752",le="60"} 0
+zt_peer_latency_bucket{node_id="2270dc1752",le="100"} 0
+zt_peer_latency_bucket{node_id="2270dc1752",le="300"} 11708
+zt_peer_latency_bucket{node_id="2270dc1752",le="600"} 11912
+zt_peer_latency_bucket{node_id="2270dc1752",le="1000"} 11912
+zt_peer_latency_bucket{node_id="2270dc1752",le="+Inf"} 11964
+zt_peer_latency_count{node_id="0bece46388"} 5860
+zt_peer_latency_sum{node_id="0bece46388"} 93316
+zt_peer_latency_bucket{node_id="0bece46388",le="1"} 0
+zt_peer_latency_bucket{node_id="0bece46388",le="3"} 0
+zt_peer_latency_bucket{node_id="0bece46388",le="6"} 169
+zt_peer_latency_bucket{node_id="0bece46388",le="10"} 773
+zt_peer_latency_bucket{node_id="0bece46388",le="30"} 5691
+zt_peer_latency_bucket{node_id="0bece46388",le="60"} 5823
+zt_peer_latency_bucket{node_id="0bece46388",le="100"} 5860
+zt_peer_latency_bucket{node_id="0bece46388",le="300"} 5860
+zt_peer_latency_bucket{node_id="0bece46388",le="600"} 5860
+zt_peer_latency_bucket{node_id="0bece46388",le="1000"} 5860
+zt_peer_latency_bucket{node_id="0bece46388",le="+Inf"} 5860
+zt_peer_latency_count{node_id="00e65076d6"} 0
+zt_peer_latency_sum{node_id="00e65076d6"} 0
+zt_peer_latency_bucket{node_id="00e65076d6",le="1"} 0
+zt_peer_latency_bucket{node_id="00e65076d6",le="3"} 0
+zt_peer_latency_bucket{node_id="00e65076d6",le="6"} 0
+zt_peer_latency_bucket{node_id="00e65076d6",le="10"} 0
+zt_peer_latency_bucket{node_id="00e65076d6",le="30"} 0
+zt_peer_latency_bucket{node_id="00e65076d6",le="60"} 0
+zt_peer_latency_bucket{node_id="00e65076d6",le="100"} 0
+zt_peer_latency_bucket{node_id="00e65076d6",le="300"} 0
+zt_peer_latency_bucket{node_id="00e65076d6",le="600"} 0
+zt_peer_latency_bucket{node_id="00e65076d6",le="1000"} 0
+zt_peer_latency_bucket{node_id="00e65076d6",le="+Inf"} 0
+zt_peer_latency_count{node_id="9fa7be8252"} 8871
+zt_peer_latency_sum{node_id="9fa7be8252"} 397856
+zt_peer_latency_bucket{node_id="9fa7be8252",le="1"} 0
+zt_peer_latency_bucket{node_id="9fa7be8252",le="3"} 0
+zt_peer_latency_bucket{node_id="9fa7be8252",le="6"} 0
+zt_peer_latency_bucket{node_id="9fa7be8252",le="10"} 0
+zt_peer_latency_bucket{node_id="9fa7be8252",le="30"} 0
+zt_peer_latency_bucket{node_id="9fa7be8252",le="60"} 7895
+zt_peer_latency_bucket{node_id="9fa7be8252",le="100"} 8735
+zt_peer_latency_bucket{node_id="9fa7be8252",le="300"} 8871
+zt_peer_latency_bucket{node_id="9fa7be8252",le="600"} 8871
+zt_peer_latency_bucket{node_id="9fa7be8252",le="1000"} 8871
+zt_peer_latency_bucket{node_id="9fa7be8252",le="+Inf"} 8871
+zt_peer_latency_count{node_id="b8fc4fde16"} 0
+zt_peer_latency_sum{node_id="b8fc4fde16"} 0
+zt_peer_latency_bucket{node_id="b8fc4fde16",le="1"} 0
+zt_peer_latency_bucket{node_id="b8fc4fde16",le="3"} 0
+zt_peer_latency_bucket{node_id="b8fc4fde16",le="6"} 0
+zt_peer_latency_bucket{node_id="b8fc4fde16",le="10"} 0
+zt_peer_latency_bucket{node_id="b8fc4fde16",le="30"} 0
+zt_peer_latency_bucket{node_id="b8fc4fde16",le="60"} 0
+zt_peer_latency_bucket{node_id="b8fc4fde16",le="100"} 0
+zt_peer_latency_bucket{node_id="b8fc4fde16",le="300"} 0
+zt_peer_latency_bucket{node_id="b8fc4fde16",le="600"} 0
+zt_peer_latency_bucket{node_id="b8fc4fde16",le="1000"} 0
+zt_peer_latency_bucket{node_id="b8fc4fde16",le="+Inf"} 0
+# HELP zt_peer_path_count number of paths to peer
+# TYPE zt_peer_path_count gauge
+zt_peer_path_count{node_id="0bece46388",status="dead"} 0
+zt_peer_path_count{node_id="0bece46388",status="alive"} 3
+zt_peer_path_count{node_id="3a47810bae",status="dead"} 0
+zt_peer_path_count{node_id="61dc473492",status="dead"} 0
+zt_peer_path_count{node_id="61dc473492",status="alive"} 0
+zt_peer_path_count{node_id="ea34585262",status="alive"} 0
+zt_peer_path_count{node_id="cf382e39c0",status="dead"} 0
+zt_peer_path_count{node_id="6a1836f6fc",status="alive"} 0
+zt_peer_path_count{node_id="db67702f91",status="dead"} 0
+zt_peer_path_count{node_id="00e65076d6",status="alive"} 0
+zt_peer_path_count{node_id="17d709436c",status="dead"} 0
+zt_peer_path_count{node_id="170a6105ef",status="alive"} 6
+zt_peer_path_count{node_id="62f865ae71",status="dead"} 1
+zt_peer_path_count{node_id="cafe9efeb9",status="dead"} 0
+zt_peer_path_count{node_id="cafe04eba9",status="alive"} 0
+zt_peer_path_count{node_id="9fa7be8252",status="dead"} 0
+zt_peer_path_count{node_id="df8c35b5da",status="dead"} 0
+zt_peer_path_count{node_id="778cde7190",status="alive"} 0
+zt_peer_path_count{node_id="eeb3c610da",status="alive"} 0
+zt_peer_path_count{node_id="b8fc4fde16",status="alive"} 0
+zt_peer_path_count{node_id="ea34585262",status="dead"} 0
+zt_peer_path_count{node_id="17d709436c",status="alive"} 0
+zt_peer_path_count{node_id="b8fc4fde16",status="dead"} 0
+zt_peer_path_count{node_id="cafe04eba9",status="dead"} 1
+zt_peer_path_count{node_id="cafe9efeb9",status="alive"} 1
+zt_peer_path_count{node_id="3a47810bae",status="alive"} 3
+zt_peer_path_count{node_id="0a1ab88bbb",status="dead"} 0
+zt_peer_path_count{node_id="2270dc1752",status="alive"} 3
+zt_peer_path_count{node_id="cf382e39c0",status="alive"} 0
+zt_peer_path_count{node_id="9d18c9adb6",status="alive"} 3
+zt_peer_path_count{node_id="778cde7190",status="dead"} 0
+zt_peer_path_count{node_id="9d18c9adb6",status="dead"} 0
+zt_peer_path_count{node_id="9fa7be8252",status="alive"} 3
+zt_peer_path_count{node_id="00e65076d6",status="dead"} 0
+zt_peer_path_count{node_id="62f865ae71",status="alive"} 0
+zt_peer_path_count{node_id="df8c35b5da",status="alive"} 6
+zt_peer_path_count{node_id="2270dc1752",status="dead"} 0
+zt_peer_path_count{node_id="47c06af649",status="alive"} 9
+zt_peer_path_count{node_id="47c06af649",status="dead"} 0
+zt_peer_path_count{node_id="6a1836f6fc",status="dead"} 0
+zt_peer_path_count{node_id="170a6105ef",status="dead"} 0
+zt_peer_path_count{node_id="eeb3c610da",status="dead"} 0
+zt_peer_path_count{node_id="67f425f9ee",status="alive"} 0
+zt_peer_path_count{node_id="db67702f91",status="alive"} 0
+zt_peer_path_count{node_id="67f425f9ee",status="dead"} 0
+zt_peer_path_count{node_id="0a1ab88bbb",status="alive"} 0
+# HELP zt_peer_packets number of packets to/from a peer
+# TYPE zt_peer_packets counter
+zt_peer_packets{direction="tx",node_id="0bece46388"} 24465
+zt_peer_packets{direction="rx",node_id="61dc473492"} 0
+zt_peer_packets{direction="tx",node_id="ea34585262"} 20865
+zt_peer_packets{direction="rx",node_id="ea34585262"} 0
+zt_peer_packets{direction="rx",node_id="cf382e39c0"} 0
+zt_peer_packets{direction="tx",node_id="eeb3c610da"} 20891
+zt_peer_packets{direction="rx",node_id="eeb3c610da"} 0
+zt_peer_packets{direction="tx",node_id="db67702f91"} 20864
+zt_peer_packets{direction="rx",node_id="db67702f91"} 0
+zt_peer_packets{direction="tx",node_id="0a1ab88bbb"} 20864
+zt_peer_packets{direction="rx",node_id="17d709436c"} 3688
+zt_peer_packets{direction="rx",node_id="df8c35b5da"} 114575
+zt_peer_packets{direction="rx",node_id="00e65076d6"} 0
+zt_peer_packets{direction="tx",node_id="67f425f9ee"} 20864
+zt_peer_packets{direction="tx",node_id="62f865ae71"} 1014
+zt_peer_packets{direction="tx",node_id="9d18c9adb6"} 56319
+zt_peer_packets{direction="rx",node_id="170a6105ef"} 112853
+zt_peer_packets{direction="rx",node_id="62f865ae71"} 237
+zt_peer_packets{direction="tx",node_id="17d709436c"} 4733
+zt_peer_packets{direction="tx",node_id="778cde7190"} 3336
+zt_peer_packets{direction="rx",node_id="b8fc4fde16"} 0
+zt_peer_packets{direction="tx",node_id="3a47810bae"} 46006
+zt_peer_packets{direction="tx",node_id="61dc473492"} 20865
+zt_peer_packets{direction="rx",node_id="778cde7190"} 274
+zt_peer_packets{direction="tx",node_id="cafe9efeb9"} 715896
+zt_peer_packets{direction="tx",node_id="6a1836f6fc"} 20864
+zt_peer_packets{direction="rx",node_id="6a1836f6fc"} 0
+zt_peer_packets{direction="tx",node_id="cafe04eba9"} 3102
+zt_peer_packets{direction="rx",node_id="47c06af649"} 117503
+zt_peer_packets{direction="rx",node_id="0a1ab88bbb"} 0
+zt_peer_packets{direction="tx",node_id="df8c35b5da"} 77984
+zt_peer_packets{direction="rx",node_id="9fa7be8252"} 44234
+zt_peer_packets{direction="rx",node_id="9d18c9adb6"} 70407
+zt_peer_packets{direction="rx",node_id="cafe04eba9"} 230
+zt_peer_packets{direction="tx",node_id="9fa7be8252"} 34763
+zt_peer_packets{direction="tx",node_id="2270dc1752"} 55021
+zt_peer_packets{direction="tx",node_id="47c06af649"} 94333
+zt_peer_packets{direction="rx",node_id="cafe9efeb9"} 1287
+zt_peer_packets{direction="tx",node_id="b8fc4fde16"} 20864
+zt_peer_packets{direction="tx",node_id="170a6105ef"} 78429
+zt_peer_packets{direction="rx",node_id="0bece46388"} 29522
+zt_peer_packets{direction="rx",node_id="3a47810bae"} 42097
+zt_peer_packets{direction="rx",node_id="2270dc1752"} 70323
+zt_peer_packets{direction="tx",node_id="00e65076d6"} 20896
+zt_peer_packets{direction="tx",node_id="cf382e39c0"} 20865
+zt_peer_packets{direction="rx",node_id="67f425f9ee"} 0
+# HELP zt_peer_packet_errors number of incoming packet errors from a peer
+# TYPE zt_peer_packet_errors counter
+zt_peer_packet_errors{node_id="3a47810bae"} 0
+zt_peer_packet_errors{node_id="db67702f91"} 0
+zt_peer_packet_errors{node_id="ea34585262"} 0
+zt_peer_packet_errors{node_id="0a1ab88bbb"} 0
+zt_peer_packet_errors{node_id="67f425f9ee"} 0
+zt_peer_packet_errors{node_id="6a1836f6fc"} 0
+zt_peer_packet_errors{node_id="cafe9efeb9"} 0
+zt_peer_packet_errors{node_id="17d709436c"} 0
+zt_peer_packet_errors{node_id="47c06af649"} 0
+zt_peer_packet_errors{node_id="778cde7190"} 0
+zt_peer_packet_errors{node_id="61dc473492"} 0
+zt_peer_packet_errors{node_id="eeb3c610da"} 0
+zt_peer_packet_errors{node_id="62f865ae71"} 0
+zt_peer_packet_errors{node_id="df8c35b5da"} 0
+zt_peer_packet_errors{node_id="170a6105ef"} 0
+zt_peer_packet_errors{node_id="cf382e39c0"} 0
+zt_peer_packet_errors{node_id="cafe04eba9"} 0
+zt_peer_packet_errors{node_id="9d18c9adb6"} 0
+zt_peer_packet_errors{node_id="2270dc1752"} 0
+zt_peer_packet_errors{node_id="0bece46388"} 0
+zt_peer_packet_errors{node_id="00e65076d6"} 0
+zt_peer_packet_errors{node_id="9fa7be8252"} 0
+zt_peer_packet_errors{node_id="b8fc4fde16"} 0
+# HELP controller_network_count number of networks the controller is serving
+# TYPE controller_network_count gauge
+controller_network_count 0
+# HELP controller_member_count number of network members the controller is serving
+# TYPE controller_member_count gauge
+controller_member_count 0
+# HELP controller_network_change_count number of times a network configuration is changed
+# TYPE controller_network_change_count counter
+controller_network_change_count 0
+# HELP controller_member_change_count number of times a network member configuration is changed
+# TYPE controller_member_change_count counter
+controller_member_change_count 0
+# HELP controller_member_auth_count number of network member auths
+# TYPE controller_member_auth_count counter
+controller_member_auth_count 0
+# HELP controller_member_deauth_count number of network member deauths
+# TYPE controller_member_deauth_count counter
+controller_member_deauth_count 0
+# HELP controller_network_config_request_queue number of entries in the request queue for network configurations
+# TYPE controller_network_config_request_queue gauge
+controller_network_config_request_queue 0
+# HELP controller_sso_expiration_checks number of sso expiration checks done
+# TYPE controller_sso_expiration_checks counter
+controller_sso_expiration_checks 0
+# HELP controller_sso_timeouts number of sso timeouts
+# TYPE controller_sso_timeouts counter
+controller_sso_timeouts 0
+# HELP controller_network_config_request count of config requests handled
+# TYPE controller_network_config_request counter
+controller_network_config_request 0
+# HELP controller_network_config_request_threads number of active network config handling threads
+# TYPE controller_network_config_request_threads gauge
+controller_network_config_request_threads 0
+# HELP controller_db_get_network counter
+# TYPE controller_db_get_network counter
+controller_db_get_network 0
+# HELP controller_db_get_network_and_member counter
+# TYPE controller_db_get_network_and_member counter
+controller_db_get_network_and_member 0
+# HELP controller_db_get_networK_and_member_summary counter
+# TYPE controller_db_get_networK_and_member_summary counter
+controller_db_get_networK_and_member_summary 0
+# HELP controller_db_get_member_list counter
+# TYPE controller_db_get_member_list counter
+controller_db_get_member_list 0
+# HELP controller_db_get_network_list counter
+# TYPE controller_db_get_network_list counter
+controller_db_get_network_list 0
+# HELP controller_db_member_change counter
+# TYPE controller_db_member_change counter
+controller_db_member_change 0
+# HELP controller_db_network_change counter
+# TYPE controller_db_network_change counter
+controller_db_network_change 0

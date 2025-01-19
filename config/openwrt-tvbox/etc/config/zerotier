@@ -1,0 +1,13 @@
+
+config zerotier 'global'
+	option nat '1'
+	option enabled '1'
+	option secret '8b6ab3adf3:0:f55d5ffc060f251a978e63feb4b99c5de18c1966158fcce44ebebd1de5c68d2f6eec8853c651ba01b6297263567525d86f91213ea8c07625d60ecd556b129222:fef15cb3b1d8106db5bb0768c559201a2828d001d25baf1393d5949402cd097ad57900a8b6a080257986c05e0a044a0d3e439c6dd46eb8d7da3b811a0082cb5d'
+	list join '17d709436c92c870'
+
+config network
+	option id '17d709436c92c870'
+
+config network
+	option id '17d709436c92c870'
+

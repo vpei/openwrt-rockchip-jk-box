@@ -1,0 +1,164 @@
+# Consider using UCI or creating files in /etc/nginx/conf.d/ for configuration.
+# Parsing UCI configuration is skipped if uci set nginx.global.uci_enable=false
+# For details see: https://openwrt.org/docs/guide-user/services/webserver/nginx
+# UCI_CONF_VERSION=1.2
+
+user root root;
+# pid /var/run/nginx.pid;			# 进程文件
+worker_processes			auto;		# 工作进程的数量 自动auto
+# worker_rlimit_nofile	65535;
+
+# 全局错误日志定义类型,[ debug | info | notice | warn | error | crit ]
+error_log /var/log/nginx.error.log notice;
+
+include module.d/*.module;
+
+events {
+	multi_accept       on;
+	worker_connections 1024;		# 每个工作进程连接数 
+}
+
+http {
+	# MIME
+	include                mime.types;
+	# default_type           application/octet-stream;
+	default_type					 text/html;
+
+
+	charset                utf-8;
+	sendfile               on;			# 开启高效文件传输模式
+	tcp_nopush             on;			# 减少网络报文段数量
+	tcp_nodelay            on;			# 提高I/O性能
+	types_hash_max_size    4096;
+	types_hash_bucket_size 4096;
+	client_max_body_size   102400M;
+
+	send_timeout 120s;		# 发送响应超时时间
+	# autoindex on;				# 自动索引，浏览文件夹
+
+	# Log Format 声明日志格式，request_length用来输出每一个请求的大小(请求行+请求头+请求体)
+	log_format openwrt '$remote_addr - $remote_user [$time_local] "$request" $status $body_bytes_sent "$http_referer" "$http_user_agent" $http_cf_ray '
+							'$http_cf_connecting_ip $http_x_forwarded_for $http_x_forwarded_proto $http_true_client_ip $http_cf_ipcountry $http_cf_visitor $http_cdn_loop $request_method '
+							'$scheme://$host$request_uri => $status (${body_bytes_sent}B in ${request_time}s) <- $http_referer';
+
+	# 设置日志模式
+	log_format  main  '$remote_addr - $remote_user [$time_local] "$request" '
+                      '$status $body_bytes_sent "$http_referer" '
+                      '"$http_user_agent" "$http_x_forwarded_for"';
+
+	# Logging
+	access_log          off;		# 关闭访问日志
+	error_log           /var/log/nginx.error.log debug;
+
+	# access_log path [format [buffer=size] [gzip[=level]] [flush=time] [if=condition]]; # 设置访问日志
+	# access_log /var/logs/nginx.access.log buffer=32k gzip flush=1m
+	# access_log /var/log/nginx.access.log openwrt;
+
+	# Limits
+	limit_req_log_level    warn;
+	limit_req_zone         $binary_remote_addr zone=login:10m rate=10r/m;
+
+	# openwrt nginx配置文件中已添加
+	# SSL
+	ssl_session_timeout    1d;
+	ssl_session_cache      shared:SSL:32k;
+	ssl_session_tickets    off;
+
+	# Diffie-Hellman parameter for DHE ciphersuites
+	# ssl_dhparam          /etc/nginx/dhparam.pem;
+
+	# Mozilla Intermediate configuration
+	ssl_protocols          TLSv1.2 TLSv1.3;
+	ssl_ciphers            ECDHE-ECDSA-AES128-GCM-SHA256:ECDHE-RSA-AES128-GCM-SHA256:ECDHE-ECDSA-AES256-GCM-SHA384:ECDHE-RSA-AES256-GCM-SHA384:ECDHE-ECDSA-CHACHA20-POLY1305:ECDHE-RSA-CHACHA20-POLY1305:DHE-RSA-AES128-GCM-SHA256:DHE-RSA-AES256-GCM-SHA384;
+
+	# OCSP Stapling
+	ssl_stapling           on;
+	ssl_stapling_verify    on;
+	resolver               1.1.1.1 1.0.0.1 8.8.8.8 8.8.4.4 208.67.222.222 208.67.220.220 valid=60s;
+	resolver_timeout       2s;
+
+	# Connection header for WebSocket reverse proxy
+	map $http_upgrade $connection_upgrade {
+		default upgrade;
+		""      close;
+	}
+
+	map $remote_addr $proxy_forwarded_elem {
+		# IPv4 addresses can be sent as-is
+		~^[0-9.]+$        "for=$remote_addr";
+
+		# IPv6 addresses need to be bracketed and quoted
+		~^[0-9A-Fa-f:.]+$ "for=\"[$remote_addr]\"";
+
+		# Unix domain socket names cannot be represented in RFC 7239 syntax
+		default           "for=unknown";
+	}
+
+	map $http_forwarded $proxy_add_forwarded {
+		# If the incoming Forwarded header is syntactically valid, append to it
+		"~^(,[ \\t]*)*([!#$%&'*+.^_`|~0-9A-Za-z-]+=([!#$%&'*+.^_`|~0-9A-Za-z-]+|\"([\\t \\x21\\x23-\\x5B\\x5D-\\x7E\\x80-\\xFF]|\\\\[\\t \\x21-\\x7E\\x80-\\xFF])*\"))?(;([!#$%&'*+.^_`|~0-9A-Za-z-]+=([!#$%&'*+.^_`|~0-9A-Za-z-]+|\"([\\t \\x21\\x23-\\x5B\\x5D-\\x7E\\x80-\\xFF]|\\\\[\\t \\x21-\\x7E\\x80-\\xFF])*\"))?)*([ \\t]*,([ \\t]*([!#$%&'*+.^_`|~0-9A-Za-z-]+=([!#$%&'*+.^_`|~0-9A-Za-z-]+|\"([\\t \\x21\\x23-\\x5B\\x5D-\\x7E\\x80-\\xFF]|\\\\[\\t \\x21-\\x7E\\x80-\\xFF])*\"))?(;([!#$%&'*+.^_`|~0-9A-Za-z-]+=([!#$%&'*+.^_`|~0-9A-Za-z-]+|\"([\\t \\x21\\x23-\\x5B\\x5D-\\x7E\\x80-\\xFF]|\\\\[\\t \\x21-\\x7E\\x80-\\xFF])*\"))?)*)?)*$" "$http_forwarded, $proxy_forwarded_elem";
+
+		# Otherwise, replace it
+		default "$proxy_forwarded_elem";
+	}
+
+	# 默认32，server_names过短就报错；如果已经存在该字段信息，需要加大后面的数值。且数值必须是32的倍数
+	server_names_hash_max_size		4096;
+	server_names_hash_bucket_size	1024;
+
+	# 客户端和服务器连接连接后接收http头部，
+	client_header_timeout 1200s;
+	# 请求行+请求头的标准大小为1024k
+	client_header_buffer_size 32k;
+	# 请求行+请求头的最大大小为2048k
+	large_client_header_buffers 64 1024k;
+
+	client_body_timeout 1200s;		# 读取http body的超时时间
+	client_body_buffer_size 64m;	# 缓冲区代理缓冲用户端请求的最大字节数
+
+	# 链接超时时间，自动断开
+	keepalive_requests 1024;		# 一个keepalive连接上默认最多发送1024个请求
+	keepalive_timeout 1200s;		# keepalive连接超过限制时间后，服务段和浏览器会断开连接。
+
+	# fastcgi_connect_timeout 300;
+	# fastcgi_send_timeout 300;
+	# fastcgi_read_timeout 300;
+	# fastcgi_buffer_size 64k;
+	# fastcgi_buffers 4 64k;
+	# fastcgi_busy_buffers_size 128k;
+	# fastcgi_temp_file_write_size 256k;
+
+	gzip on;
+	gzip_vary on;
+	gzip_min_length  1k;
+	gzip_buffers     4 16k;
+	gzip_http_version 1.1;
+	gzip_comp_level 2;
+	gzip_types     text/plain application/javascript application/x-javascript text/javascript text/css application/xml application/xml+rss;
+	gzip_proxied any;
+	# gzip_proxied   expired no-cache no-store private auth;
+	gzip_disable   "MSIE [1-6]\.";
+
+	# 下面这段就是反代缓存设置了
+	server_tokens off;
+	proxy_ignore_client_abort on;	# on开启，则服务器会忽略客户端中断，一直等着代理服务执行返回。默认是关闭的，即请求过程中如果客户端端主动关闭请求或者客户端网络断掉，那么Nginx会记录499。 499 ：client has closed connection
+	proxy_connect_timeout    5;		# nginx跟后端服务器连接超时时间(代理连接超时)
+	proxy_read_timeout       60;	# 连接成功后，后端服务器响应时间(代理接收超时)
+	proxy_send_timeout       30;	# 请求的超时时间
+	proxy_buffer_size        16k;	# 设置代理服务器（nginx）保存用户头信息的缓冲区大小
+	proxy_buffers            4 64k;	# proxy_buffers缓冲区，网页平均在64k以下
+	proxy_busy_buffers_size 128k;	# 高负荷下缓冲大小（proxy_buffers*2）
+	proxy_temp_file_write_size 128k;
+	# proxy_temp_path   /mnt/sda3/cache/temp;
+	# proxy_cache_path  /mnt/sda3/cache/path levels=1:2 keys_zone=cache_one:256m inactive=3d max_size=5g;
+	# 这一段就是反代的一些缓存和设置，最后一句cache_one为缓存区名字，100m是内存占用， 3d是3天删除， 5g是缓存空间,
+
+	lingering_close always;			# always表示关闭用户连接前必须无条件地处理连接上所有用户发送的数据。off表示关闭连接时完全不管连接上是否已经有准备就绪的来自用户的数据。on是中间值，一般情况下在关闭连接前都会处理连接上的用户发送的数据，除了有些情况下在业务上认定这之后的数据是不必要的。
+	lingering_time 120s;			# 默认时间30s；
+
+	root /www;
+
+	#UCI_HTTP_CONFIG
+
+	include conf.d/*.conf;
+}

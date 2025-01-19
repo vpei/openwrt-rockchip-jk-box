@@ -1,0 +1,13 @@
+
+config globals 'globals'
+	option data_root '/mnt/mmcblk0p4/docker/'
+	option log_level 'warn'
+	option iptables '1'
+	option remote_endpoint '0'
+	option bip '172.147.0.1/16'
+	list registry_mirrors 'https://d.vpei.eu.org'
+
+config firewall 'firewall'
+	option device 'docker0'
+	list blocked_interfaces 'wan'
+

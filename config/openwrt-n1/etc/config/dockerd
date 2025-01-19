@@ -1,0 +1,12 @@
+
+config globals 'globals'
+	option data_root '/mnt/mmcblk2p4/docker/'
+	option log_level 'warn'
+	option iptables '1'
+	option remote_endpoint '0'
+	list registry_mirrors 'https://docker.mirrors.ustc.edu.cn'
+
+config firewall 'firewall'
+	option device 'docker0'
+	list blocked_interfaces 'wan'
+

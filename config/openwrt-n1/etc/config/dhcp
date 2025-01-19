@@ -1,0 +1,90 @@
+
+config dnsmasq
+	option localise_queries '1'
+	option local '/lan/'
+	option domain 'lan'
+	option expandhosts '1'
+	option authoritative '1'
+	option readethers '1'
+	option leasefile '/tmp/dhcp.leases'
+	option quietdhcp '1'
+	option localservice '1'
+	option port '53'
+	option filterwin2k '1'
+	option nonegcache '1'
+	option mini_ttl '0'
+	option nohosts '1'
+	option cachesize '0'
+	option dnsseccheckunsigned '0'
+	option rebind_protection '0'
+	list server '127.0.0.1#6053'
+	option noresolv '1'
+	list notinterface 'zerotier'
+	option domainneeded '1'
+
+config dhcp 'lan'
+	option interface 'lan'
+	option dhcpv4 'server'
+	list ra_flags 'managed-config'
+	list ra_flags 'other-config'
+	option start '1'
+	option force '1'
+	option limit '250'
+	option leasetime '8h'
+	option ra 'server'
+	option dhcpv6 'server'
+	option ra_management '1'
+
+config dhcp 'wan'
+	option interface 'wan'
+	option ignore '1'
+
+config odhcpd 'odhcpd'
+	option maindhcp '0'
+	option leasefile '/tmp/hosts/odhcpd'
+	option leasetrigger '/usr/sbin/odhcpd-update'
+	option loglevel '4'
+
+config host
+	option dns '1'
+	option ip '192.168.3.2'
+	option name 'BK-00'
+
+config host
+	option dns '1'
+	option ip '192.168.3.3'
+	option name 'BK-01'
+
+config host
+	option name 'BB-00'
+	option dns '1'
+	option ip '192.168.3.4'
+
+config host
+	option name 'CN'
+	option dns '1'
+	option ip '192.168.3.5'
+
+config host
+	option ip '192.168.3.6'
+	option name 'BB-01'
+	option dns '1'
+
+config host
+	option name 'NPIE940AD'
+	option dns '1'
+	option ip '192.168.3.7'
+
+config host
+	option mac '72:CD:93:35:D2:A1'
+	option ip '192.168.3.8'
+
+config host
+	option dns '1'
+	option ip '192.168.3.180'
+	option name 'P-NET'
+
+config domain
+	option name 'e.vmess.com'
+	option ip '192.168.3.5'
+
