@@ -3,7 +3,7 @@
 # Description: Build OpenWrt
 #============================================================================================
 
-name: A-Build-OpenWrt-JP-TVBox-2024
+name: A-Build-OpenWrt-JP-TVBox-2025
 
 on:
   repository_dispatch:
@@ -71,7 +71,6 @@ on:
           - r68s
           - renegade-rk3328
           - rk3318-box
-          - rock-3a
           - rock5b
           - rock5c
           - ruisen-box
