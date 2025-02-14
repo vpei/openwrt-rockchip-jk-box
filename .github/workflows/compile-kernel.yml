@@ -21,7 +21,7 @@ on:
       kernel_version:
         description: "Select kernel version"
         required: false
-        default: "6.6.y"
+        default: "6.12.y"
         type: choice
         options:
           - 5.4.y
@@ -29,8 +29,10 @@ on:
           - 5.15.y
           - 6.1.y
           - 6.6.y
-          - 6.1.y_6.6.y
-          - 5.15.y_5.10.y
+          - 6.12.y
+          - 5.4.y_5.10.y
+          - 5.15.y_6.1.y
+          - 6.6.y_6.12.y
       kernel_auto:
         description: "Auto use the latest kernel"
         required: false
@@ -100,7 +102,7 @@ jobs:
           sudo rm -f /swapfile /mnt/swapfile
           sudo -E apt-get -y update
           sudo -E apt-get -y purge azure-cli ghc* zulu* llvm* firefox google* dotnet* powershell openjdk* mongodb* moby* || true
-          sudo -E apt-get -y install $(curl -fsSL https://is.gd/depend_ubuntu2204_armbian)
+          sudo -E apt-get -y install $(curl -fsSL https://tinyurl.com/ubuntu2204-build-armbian)
           sudo -E systemctl daemon-reload
           #sudo -E apt-get -y full-upgrade
           sudo -E apt-get -y autoremove --purge
