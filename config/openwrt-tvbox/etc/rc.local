@@ -32,8 +32,8 @@ sleep 120
 /usr/sbin/balethirq.pl
 bash /etc/custom_service/start_service.sh
 
-sleep 5
+sleep 15
 
-/etc/init.d/nginx restart
+service nginx restart
 
 exit 0
