@@ -2,12 +2,17 @@
 config zerotier 'global'
 	option nat '1'
 	option enabled '1'
-	option secret '8b6ab3adf3:0:f55d5ffc060f251a978e63feb4b99c5de18c1966158fcce44ebebd1de5c68d2f6eec8853c651ba01b6297263567525d86f91213ea8c07625d60ecd556b129222:fef15cb3b1d8106db5bb0768c559201a2828d001d25baf1393d5949402cd097ad57900a8b6a080257986c05e0a044a0d3e439c6dd46eb8d7da3b811a0082cb5d'
-	list join '17d709436c92c870'
+	option secret '3d4cacada4:0:b629e8283039b1cbe8f43d4251cb31303c954d56e646308be2f6cc317b2c6a745a7a0e7c12dc9f21b3b8e28f882165be6b4609fadbbf33f6cb938a9ff992c32e:06144892ea67f251900daba76a1d50fccfa45b3fffdd136e76dbc3b84b8d76723f1116d7365cd2e64d696baee650393631ed83fd7b3c180cb511949f37316624'
+	option config_path '/etc/config/zero'
+	option copy_config_path '1'
+	option fw_allow_input '1'
 
 config network
 	option id '17d709436c92c870'
-
-config network
-	option id '17d709436c92c870'
+	option allow_default '1'
+	option allow_dns '1'
+	option fw_allow_input '1'
+	option fw_allow_forward '1'
+	option allow_global '1'
+	option fw_allow_masq '1'
 

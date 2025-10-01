@@ -17,25 +17,20 @@ config device
 config interface 'lan'
 	option device 'br-lan'
 	option proto 'static'
-	option ipaddr '192.168.4.254'
+	option ipaddr '192.168.3.254'
 	option netmask '255.255.255.0'
 	option ip6ifaceid '::254'
 	option ip6assign '64'
-	list dns '192.168.4.254'
+	list dns '202.102.213.68'
+	list dns '202.102.199.68'
 
 config interface 'zerotier'
 	option proto 'dhcp'
 	option device 'ztks5zxcy4'
 
 config interface 'wan'
-	option proto 'pppoe'
+	option proto 'dhcp'
 	option device 'eth0'
-	option username 'root'
-	option password 'root'
-	option ipv6 'auto'
-	option peerdns '0'
-	option ip6assign '64'
-	list dns '1.1.1.1'
 
 config interface 'wan6'
 	option proto 'dhcpv6'
@@ -43,8 +38,7 @@ config interface 'wan6'
 	option reqaddress 'try'
 	option reqprefix 'auto'
 	option norelease '1'
-	list ip6class 'local'
-	list ip6class 'wan_6'
+	option ip6assign '64'
 
 config interface 'docker'
 	option device 'docker0'
@@ -54,7 +48,4 @@ config interface 'docker'
 config device
 	option type 'bridge'
 	option name 'docker0'
-
-config device
-	option name 'phy0-ap0'
 

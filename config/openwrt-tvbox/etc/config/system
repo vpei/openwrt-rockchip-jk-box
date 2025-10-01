@@ -6,9 +6,9 @@ config system
 	option conloglevel '1'
 	option cronloglevel '9'
 	option log_size '8'
-	option hostname 'TVBOX-D'
-	option description 'D-TVBOX-NET-Description'
-	option notes 'D-TVBOX-NET-Notes'
+	option hostname 'TVBOX-C'
+	option description 'C-TVBOX-NET-Description'
+	option notes 'C-TVBOX-NET-Notes'
 	option zonename 'Asia/Hong Kong'
 	option timezone 'HKT-8'
 	option zram_comp_algo 'lzo'
@@ -20,11 +20,16 @@ config timeserver 'ntp'
 	list server '3.openwrt.pool.ntp.org'
 
 config led
-	option sysfs 'red:work'
 	option name 'red'
+	option sysfs 'red:work'
 	option trigger 'netdev'
 	option dev 'eth0'
 	list mode 'link'
 	list mode 'tx'
 	list mode 'rx'
+
+config led
+	option name 'white'
+	option sysfs 'mmc0::'
+	option trigger 'default-on'
 

@@ -13,10 +13,11 @@ config server '_lan'
 	option ssl_certificate_key '/etc/nginx/conf.d/_lan.key'
 	option ssl_session_cache 'shared:SSL:32k'
 	option ssl_session_timeout '64m'
-	option access_log 'off; # logd openwrt'
+	option access_log 'off'   	# logd openwrt
 
 config server '_redirect2ssl'
 	list listen '80'
 	list listen '[::]:80'
+	# option server_name 'vpei.vmess.com 0.vmess.com 1.vmess.com 2.vmess.com 3.vmess.com 4.vmess.com 5.vmess.com 6.vmess.com 7.vmess.com 8.vmess.com 9.vmess.com alist.vmess.com bdns.vmess.com ddns.vmess.com hdns.vmess.com qb.vmess.com ql.vmess.com'
 	option server_name '_redirect2ssl'
 	option return '302 https://$host$request_uri'

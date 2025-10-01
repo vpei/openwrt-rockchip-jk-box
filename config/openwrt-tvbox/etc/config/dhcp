@@ -12,20 +12,19 @@ config dnsmasq
 	option nonegcache '1'
 	option mini_ttl '0'
 	option nohosts '1'
-	option cachesize '10000'
+	option cachesize '0'
 	option dnsseccheckunsigned '0'
 	option rebind_protection '0'
 	list notinterface 'zerotier'
 	option sequential_ip '1'
 	option domainneeded '1'
-	option filterwin2k '1'
 	option addmac '1'
 	option stripmac '1'
 	option stripsubnet '1'
 	option localuse '1'
-	option ignore_hosts_dir '1'
 	list server '127.0.0.1#6053'
 	option noresolv '1'
+	option ignore_hosts_dir '1'
 
 config dhcp 'lan'
 	option interface 'lan'
@@ -100,17 +99,7 @@ config domain
 	option name 'flux.hcdn.qiyi.com'
 	option ip '116.211.227.45'
 
-config host
-	option name 'CN'
-	option ip '192.168.4.5'
-	option leasetime '12h'
-
 config domain
-	option name 'vpn.vmess.com'
-	option ip '192.168.4.254'
-
-config host
-	option name 'BB-01'
-	option ip '192.168.4.1'
-	option leasetime '12h'
+	option name '3.vmess.com'
+	option ip '192.168.3.254'
 

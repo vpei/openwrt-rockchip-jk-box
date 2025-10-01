@@ -1,0 +1,1 @@
+{ "data-root": "\/mnt\/mmcblk0p4\/docker\/", "log-level": "warn", "iptables": true, "registry-mirrors": ["https://d.vpei.eu.org","http://mirrors.aliyun.com/"] }
