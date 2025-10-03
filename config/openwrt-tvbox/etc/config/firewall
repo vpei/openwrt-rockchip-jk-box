@@ -4,8 +4,8 @@ config defaults
 	option output 'ACCEPT'
 	option forward 'ACCEPT'
 	option auto_includes '1'
-	option drop_invalid '1'
 	option synflood_protect '1'
+	option drop_invalid '1'
 	option flow_offloading '1'
 
 config zone
@@ -18,13 +18,13 @@ config zone
 
 config zone
 	option name 'wan'
+	list network 'wan'
+	list network 'wan6'
 	option input 'ACCEPT'
 	option output 'ACCEPT'
 	option forward 'ACCEPT'
 	option mtu_fix '1'
 	option masq '1'
-	list network 'wan6'
-	list network 'wan'
 
 config forwarding
 	option src 'lan'
@@ -141,6 +141,8 @@ config rule
 	option name '81.12.32.26'
 	option target 'DROP'
 	option src 'wan'
+	list src_ip '183.81.169.238/24'
+	list src_ip '180.101.88.200'
 	list src_ip '104.252.127.223/24'
 
 config rule
@@ -184,15 +186,5 @@ config include 'passwall'
 config include 'passwall_server'
 	option type 'script'
 	option path '/var/etc/passwall_server.include'
-	option reload '1'
-
-config include 'passwall2'
-	option type 'script'
-	option path '/var/etc/passwall2.include'
-	option reload '1'
-
-config include 'passwall2_server'
-	option type 'script'
-	option path '/var/etc/passwall2_server.include'
 	option reload '1'
 

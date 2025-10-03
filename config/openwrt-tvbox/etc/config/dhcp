@@ -1,105 +1,36 @@
 
 config dnsmasq
 	option localise_queries '1'
+	option rebind_protection '0'
 	option local '/lan/'
 	option domain 'lan'
 	option expandhosts '1'
+	option cachesize '10000'
 	option authoritative '1'
-	option readethers '1'
 	option leasefile '/tmp/dhcp.leases'
-	option quietdhcp '1'
 	option localservice '0'
 	option nonegcache '1'
-	option mini_ttl '0'
-	option nohosts '1'
-	option cachesize '0'
 	option dnsseccheckunsigned '0'
-	option rebind_protection '0'
 	list notinterface 'zerotier'
-	option sequential_ip '1'
-	option domainneeded '1'
+	option nonwildcard '0'
+	option filter_aaaa '1'
+	option readethers '1'
+	option nohosts '1'
+	option logqueries '1'
+	option logdhcp '1'
 	option addmac '1'
 	option stripmac '1'
 	option stripsubnet '1'
 	option localuse '1'
+	option dns_redirect '0'
+	option ignore_hosts_dir '1'
 	list server '127.0.0.1#6053'
 	option noresolv '1'
-	option ignore_hosts_dir '1'
-
-config dhcp 'lan'
-	option interface 'lan'
-	option dhcpv4 'server'
-	list ra_flags 'managed-config'
-	list ra_flags 'other-config'
-	option start '1'
-	option force '1'
-	option limit '250'
-	option leasetime '12h'
-	option ra 'server'
-	option dhcpv6 'server'
-	option ra_management '1'
-	option dns_service '0'
-	option ra_useleasetime '1'
-
-config dhcp 'wan'
-	option interface 'wan'
-	option ignore '1'
+	option sequential_ip '1'
 
 config odhcpd 'odhcpd'
 	option maindhcp '0'
 	option leasefile '/tmp/hosts/odhcpd'
 	option leasetrigger '/usr/sbin/odhcpd-update'
 	option loglevel '4'
-
-config domain
-	option name 'movie.vmess.com'
-	option ip '192.168.168.4'
-
-config domain
-	option name 'ipes-tus.iqiyi.com'
-	option ip '220.181.125.24'
-
-config domain
-	option name 'msg.71edge.com'
-	option ip '36.110.164.3'
-
-config domain
-	option name 'msg.video.dns.iqiyi.com'
-	option ip '220.181.125.101'
-
-config domain
-	option name 'ipes-gin.iqiyi.com'
-	option ip '220.181.125.24'
-
-config domain
-	option name 'apigw-intl.iqiyi.com'
-	option ip '159.138.105.102'
-
-config domain
-	option name 'data-video.71edge.com'
-	option ip '124.237.225.51'
-
-config domain
-	option name 'data.video.dns.iqiyi.com'
-	option ip '124.237.225.51'
-
-config domain
-	option name 'policy-video.71edge.com'
-	option ip '150.138.236.144'
-
-config domain
-	option name 'ip.geo.71edge.com'
-	option ip '103.44.59.10'
-
-config domain
-	option name 'flux.hcdn.71edge.com'
-	option ip '106.12.206.25'
-
-config domain
-	option name 'flux.hcdn.qiyi.com'
-	option ip '116.211.227.45'
-
-config domain
-	option name '3.vmess.com'
-	option ip '192.168.3.254'
 

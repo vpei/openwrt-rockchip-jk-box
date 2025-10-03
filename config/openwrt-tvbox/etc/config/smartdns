@@ -5,7 +5,10 @@ config smartdns
 	option seconddns_port '6553'
 	option tcp_server '1'
 	option server_name 'smartdns'
-	option cache_size '1024'
+	option rr_ttl '600'
+	option rr_ttl_max '900'
+	option rr_ttl_min '300'
+	option cache_size '0'
 	option dualstack_ip_selection '1'
 	option ipv6_server '1'
 	option serve_expired '1'
@@ -13,17 +16,12 @@ config smartdns
 	option resolve_local_hostnames '1'
 	option auto_set_dnsmasq '1'
 	option force_https_soa '0'
+	option rr_ttl_reply_max '900'
 	option coredump '1'
 	option port '6053'
 	option bind_device '1'
 	option cache_persist '0'
 	option enable_auto_update '1'
-	option response_mode 'fastest-ip'
-	option rr_ttl '600'
-	option rr_ttl_min '600'
-	option rr_ttl_max '900'
-	option rr_ttl_reply_max '900'
-	option log_file '/var/log/smartdns.log'
 	option old_port '6053'
 	option old_enabled '1'
 	option old_auto_set_dnsmasq '1'
@@ -62,6 +60,13 @@ config server
 
 config server
 	option port '53'
+	option name 'IBM-2620:fe::fe'
+	option type 'udp'
+	option ip '2620:fe::fe'
+	option enabled '0'
+
+config server
+	option port '53'
 	option name 'TW-2001:b000:168::1'
 	option type 'udp'
 	option ip '2001:b000:168::1'
@@ -69,7 +74,7 @@ config server
 
 config server
 	option enabled '0'
-	option name 'IBM-QUAD-2620:fe::fe'
+	option name 'IBM-QUAD9-2620:fe::fe'
 	option ip '2620:fe::fe'
 	option type 'udp'
 	option port '53'
@@ -95,13 +100,13 @@ config server
 	option ip '114.114.114.114'
 	option port '53'
 	option name 'NJ-114.114.114.114'
-	option enabled '1'
+	option enabled '0'
 
 config server
 	option type 'udp'
 	option blacklist_ip '0'
 	option port '53'
-	option enabled '1'
+	option enabled '0'
 	option name 'AL-223.5.5.5'
 	option ip '223.5.5.5'
 
@@ -111,21 +116,21 @@ config server
 	option type 'udp'
 	option ip '119.29.29.29'
 	option name 'TX-119.29.29.29'
-	option enabled '1'
+	option enabled '0'
 
 config server
 	option port '53'
 	option blacklist_ip '0'
 	option type 'udp'
 	option ip '180.76.76.76'
-	option enabled '1'
+	option enabled '0'
 	option name 'BD-180.76.76.76'
 
 config server
 	option port '53'
 	option blacklist_ip '0'
 	option type 'udp'
-	option enabled '1'
+	option enabled '0'
 	option name 'AH-202.102.213.68'
 	option ip '202.102.213.68'
 
@@ -150,13 +155,13 @@ config server
 	option name 'CF-1.1.1.1'
 	option port '853'
 	option type 'tls'
-	option enabled '0'
+	option enabled '1'
 
 config server
 	option enabled '0'
 	option name 'CF-1.1.1.1'
-	option ip 'https://1.1.1.1/dns-query'
-	option type 'https'
+	option ip 'tls://1.1.1.1/dns-query'
+	option type 'tls'
 
 config server
 	option enabled '0'
@@ -179,7 +184,7 @@ config server
 	option blacklist_ip '0'
 	option type 'udp'
 	option ip '168.95.1.1'
-	option enabled '0'
+	option enabled '1'
 
 config server
 	option port '53'
@@ -194,7 +199,7 @@ config server
 	option name 'ELS-YandexDNS- 77.88.8.8'
 	option type 'udp'
 	option ip '77.88.8.8'
-	option enabled '0'
+	option enabled '1'
 
 config server
 	option enabled '0'
@@ -218,14 +223,14 @@ config server
 	option port '53'
 
 config server
-	option enabled '0'
+	option enabled '1'
 	option name 'US-CB-185.228.168.9'
 	option ip '185.228.168.9'
 	option type 'udp'
 	option port '53'
 
 config server
-	option enabled '0'
+	option enabled '1'
 	option name 'US-Level3-4.2.2.4'
 	option ip '4.2.2.4'
 	option type 'udp'
@@ -239,13 +244,6 @@ config server
 	option port '53'
 
 config domain-rule
-	option forwarding_domain_set_file '/etc/smartdns/domain-set/chinalist.txt'
-
-config download-file
-	option name 'overseas.txt'
-	option url 'https://raw.githubusercontent.com/ruijzhan/chnroute/master/gfwlist.txt'
-	option type 'list'
-	option desc 'overseas.txt'
 
 config download-file
 	option name 'chinalist.txt'
@@ -253,7 +251,54 @@ config download-file
 	option type 'list'
 	option desc 'chinalist.txt'
 
+config server
+	option enabled '1'
+	option name 'Norton ConnectSafe - 199.85.127.10'
+	option ip '199.85.127.10'
+	option type 'udp'
+	option port '53'
+
+config server
+	option enabled '0'
+	option name 'OpenDNS - 208.67.220.220'
+	option ip '208.67.220.220'
+	option port '53'
+	option type 'udp'
+
+config server
+	option enabled '1'
+	option name 'DNS Watch  - 84.200.70.40'
+	option ip '84.200.70.40'
+	option port '53'
+	option type 'udp'
+
+config server
+	option enabled '0'
+	option name 'Comodo - 8.26.56.26'
+	option ip '8.26.56.26'
+	option port '53'
+	option type 'udp'
+
+config server
+	option enabled '1'
+	option name 'Verisign - 64.6.65.6'
+	option ip '64.6.65.6'
+	option port '53'
+	option type 'udp'
+
 config client-rule
 
 config ip-rule
+
+config server
+	option enabled '1'
+	option name 'DNS4EU'
+	option ip '86.54.11.100'
+	option type 'udp'
+
+config server
+	option enabled '0'
+	option name 'DNS4EU-LIMIT'
+	option ip '86.54.11.1'
+	option type 'udp'
 

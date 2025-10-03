@@ -1,0 +1,21 @@
+
+config global 'global'
+	option enable '1'
+
+config user '3898e2c516d74a3ba83ab3a598d0f8e2'
+	option enable '1'
+	option remarks 'VMESS-192.168.168.0:50058'
+	option type 'sing-box'
+	option port '50058'
+	option hysteria2_obfs 'http'
+	option hysteria2_ignoreClientBandwidth '1'
+	option log '1'
+	option protocol 'vmess'
+	list uuid '086eb1fe-6983-8935-b893-9e8adb3c6b00'
+	option tls '0'
+	option transport 'tcp'
+	option mux '0'
+	option accept_lan '1'
+	option outbound_node 'EVHgmRX2'
+	option loglevel 'info'
+

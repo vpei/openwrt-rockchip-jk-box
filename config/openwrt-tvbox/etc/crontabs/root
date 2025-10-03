@@ -1,5 +1,3 @@
-*     *       *       *       *   echo `date` > /kuaicdn/app/ipes/var/log/ipes/cron.log && sh /kuaicdn/app/ipes/bin/check start >> /kuaicdn/app/ipes/var/log/ipes/cron.log  2>&1
-// 03 4 * * * sleep 5 && touch /etc/banner && reboot   //每天4点03分路由器自动重启
+// 52 02 * * * sleep 5 && touch /etc/banner && reboot   //每天2点52分路由器自动重启
 3 3 12 12 * /usr/bin/nginx-util 'check_ssl'
-17 3 * * * /etc/coremark.sh
 0 5 * * * /etc/init.d/smartdns updatefiles

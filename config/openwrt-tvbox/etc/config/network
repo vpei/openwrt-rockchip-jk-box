@@ -8,44 +8,29 @@ config interface 'loopback'
 config globals 'globals'
 	option packet_steering '1'
 	option steering_flows '128'
-
-config device
-	option name 'br-lan'
-	option type 'bridge'
-	list ports 'phy0-ap0'
-
-config interface 'lan'
-	option device 'br-lan'
-	option proto 'static'
-	option ipaddr '192.168.3.254'
-	option netmask '255.255.255.0'
-	option ip6ifaceid '::254'
-	option ip6assign '64'
-	list dns '202.102.213.68'
-	list dns '202.102.199.68'
-
-config interface 'zerotier'
-	option proto 'dhcp'
-	option device 'ztks5zxcy4'
+	option tcp_l3mdev '1'
+	option udp_l3mdev '1'
 
 config interface 'wan'
-	option proto 'dhcp'
 	option device 'eth0'
-
-config interface 'wan6'
-	option proto 'dhcpv6'
-	option device 'eth0'
-	option reqaddress 'try'
-	option reqprefix 'auto'
-	option norelease '1'
+	option proto 'static'
+	option ipaddr '64.69.32.7'
+	option gateway '64.69.32.1'
+	option netmask '255.255.255.128'
 	option ip6assign '64'
+	list dns '64.69.32.7'
+	list dns '8.8.8.8'
+	option ip6ifaceid '::254'
 
 config interface 'docker'
 	option device 'docker0'
 	option proto 'none'
-	option auto '0'
 
 config device
 	option type 'bridge'
 	option name 'docker0'
+
+config interface 'zerotier'
+	option proto 'dhcp'
+	option device 'ztks5zxcy4'
 
